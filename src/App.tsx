@@ -15,13 +15,11 @@ const App = () => {
         <Navbar />
       </GridItem>
 
-      <GridItem area='aside' bg='green' display={{ base: 'none', lg: 'block' }}>
+      <GridItem area='aside' display={{ base: 'none', lg: 'block' }}>
         Aside
       </GridItem>
 
-      <GridItem area='main' bg='gold'>
-        Main
-      </GridItem>
+      <GridItem area='main'>Main</GridItem>
     </Grid>
   );
 };
