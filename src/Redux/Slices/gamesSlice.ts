@@ -23,6 +23,13 @@ interface PLATFORM_DETAILS {
   };
 }
 
+interface RATINGS {
+  id: number;
+  count: number;
+  percent: number;
+  title: string;
+}
+
 interface GAME_RESULT {
   id: number;
   slug: string;
@@ -39,6 +46,7 @@ interface GAME_RESULT {
   updated: string;
   esrb_rating: ESRB_RATING;
   platform: PLATFORM_DETAILS[];
+  ratings: RATINGS[];
 }
 
 interface GAME_RESPONSE {
