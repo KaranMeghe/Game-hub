@@ -12,7 +12,7 @@ const GameContainer = () => {
     const gamesList = async () => {
       try {
         const response = await fetchGames();
-        dispatch(fetchGamesSuccess(response.data));
+        dispatch(fetchGamesSuccess(response));
       } catch (error) {
         const err = error as Error;
         console.log(err.message);
