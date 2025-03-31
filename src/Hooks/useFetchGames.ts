@@ -12,10 +12,13 @@ const useFetchGames = () => {
   const { isLoading, gameList, error } = useSelector((store: RootState) => store.games);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+
     const gamesList = async () => {
       try {
         dispatch(fetchGamesStart());
-        const response = await fetchGames();
+        const response = await fetchGames(signal);
 
         if (response) {
           dispatch(fetchGamesSuccess(response));
@@ -29,6 +32,10 @@ const useFetchGames = () => {
     };
 
     gamesList();
+
+    return () => {
+      controller.abort();
+    };
   }, [dispatch]);
 
   return { gameList, isLoading, error };
