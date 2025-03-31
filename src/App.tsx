@@ -1,7 +1,7 @@
 /** @format */
 
 import { Grid, GridItem } from '@chakra-ui/react';
-import { Navbar } from './components';
+import { GameContainer, Navbar } from './components';
 import { Provider } from 'react-redux';
 import { store } from './Redux/store';
 
@@ -23,7 +23,9 @@ const App = () => {
           Aside
         </GridItem>
 
-        <GridItem area='main'>Main</GridItem>
+        <GridItem area='main'>
+          <GameContainer />
+        </GridItem>
       </Grid>
     </Provider>
   );
