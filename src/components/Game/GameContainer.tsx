@@ -1,27 +1,10 @@
 /** @format */
 
-import { fetchGamesFailure, fetchGamesSuccess } from '@/Redux/store';
-import { fetchGames } from '@/services/services';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import useFetchGames from '@/Hooks/useFetchGames';
 
+/** @format */
 const GameContainer = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const gamesList = async () => {
-      try {
-        const response = await fetchGames();
-        dispatch(fetchGamesSuccess(response));
-      } catch (error) {
-        const err = error as Error;
-        console.log(err.message);
-        dispatch(fetchGamesFailure(err.message));
-      }
-    };
-
-    gamesList();
-  }, [dispatch]);
+  useFetchGames();
   return <div>GameContainer</div>;
 };
 
