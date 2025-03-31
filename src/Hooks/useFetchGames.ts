@@ -2,10 +2,10 @@
 
 import { fetchGamesSuccess, fetchGamesFailure, fetchGamesStart } from '@/Redux/Slices/gamesSlice';
 import { AppDispatch, RootState } from '@/Redux/store';
-
 import { fetchGames } from '@/services/services';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import axios from 'axios';
 
 const useFetchGames = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,20 +19,17 @@ const useFetchGames = () => {
       try {
         dispatch(fetchGamesStart());
         const response = await fetchGames(signal);
-
-        if (response) {
-          dispatch(fetchGamesSuccess(response));
-        } else {
-          dispatch(fetchGamesFailure('Failed to fetch games.'));
-        }
+        dispatch(fetchGamesSuccess(response));
       } catch (error) {
-        const err = error as Error;
-        dispatch(fetchGamesFailure(err.message));
+        if (axios.isCancel(error)) {
+          console.log('Request was cancelled');
+          return;
+        }
+        dispatch(fetchGamesFailure((error as Error).message));
       }
     };
 
     gamesList();
-
     return () => {
       controller.abort();
     };

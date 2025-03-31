@@ -13,5 +13,6 @@ export const fetchGames = async (signal?: AbortSignal) => {
     return data;
   } catch (error) {
     console.error(`Error fetching games:`, error);
+    throw error;
   }
 };
