@@ -9,6 +9,7 @@ export const fetchGames = async () => {
   try {
     const response = await axios.get(`${baseUrl}/games?key=${API_KEY}`);
     const data = response.data;
+    return data;
     console.log(data);
   } catch (error) {
     console.error(`Error fetching games:`, error);
