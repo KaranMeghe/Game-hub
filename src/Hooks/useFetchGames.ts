@@ -1,28 +1,37 @@
 /** @format */
 
-import { fetchGamesSuccess, fetchGamesFailure, fetchGamesStart } from '@/Redux/store';
+import { fetchGamesSuccess, fetchGamesFailure, fetchGamesStart } from '@/Redux/Slices/gamesSlice';
+import { AppDispatch, RootState } from '@/Redux/store';
+
 import { fetchGames } from '@/services/services';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useFetchGames = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
+  const { isLoading, gameList, error } = useSelector((store: RootState) => store.games);
 
   useEffect(() => {
     const gamesList = async () => {
       try {
         dispatch(fetchGamesStart());
         const response = await fetchGames();
-        dispatch(fetchGamesSuccess(response));
+
+        if (response) {
+          dispatch(fetchGamesSuccess(response));
+        } else {
+          dispatch(fetchGamesFailure('Failed to fetch games.'));
+        }
       } catch (error) {
         const err = error as Error;
-        console.log(err.message);
         dispatch(fetchGamesFailure(err.message));
       }
     };
 
     gamesList();
   }, [dispatch]);
+
+  return { gameList, isLoading, error };
 };
 
 export default useFetchGames;

@@ -2,7 +2,6 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import { gamesReducer } from './Slices/gamesSlice';
-import { fetchGamesStart, fetchGamesFailure, fetchGamesSuccess } from './Slices/gamesSlice';
 
 const store = configureStore({
   reducer: {
@@ -10,6 +9,7 @@ const store = configureStore({
   },
 });
 
-export { store, fetchGamesStart, fetchGamesFailure, fetchGamesSuccess };
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
-// medalaii
+export { store };
