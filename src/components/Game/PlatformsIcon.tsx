@@ -9,7 +9,6 @@ interface PLATFORM {
 }
 
 const PlatformsIcon: React.FC<PLATFORM> = ({ platformIcons }) => {
-  console.log(platformIcons);
   return (
     <HStack marginY={1}>
       {platformIcons?.map(({ platform }) => (
