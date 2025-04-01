@@ -19,11 +19,11 @@ const App = () => {
           <Navbar />
         </GridItem>
 
-        <GridItem area='aside' display={{ base: 'none', lg: 'block' }}>
+        <GridItem area='aside' display={{ base: 'none', lg: 'block' }} mt='80px'>
           Aside
         </GridItem>
 
-        <GridItem area='main'>
+        <GridItem area='main' mt='80px'>
           <GameContainer />
         </GridItem>
       </Grid>
