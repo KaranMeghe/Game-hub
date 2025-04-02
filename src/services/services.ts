@@ -5,6 +5,7 @@ import axios from 'axios';
 const API_KEY = import.meta.env.VITE_API_KEY;
 const baseUrl = 'https://api.rawg.io/api';
 
+// Fetch Games
 export const fetchGames = async (signal?: AbortSignal) => {
   try {
     const response = await axios.get(`${baseUrl}/games?key=${API_KEY}`, { signal });
@@ -20,6 +21,7 @@ export const fetchGames = async (signal?: AbortSignal) => {
 // "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg"
 //"https://media.rawg.io/media/crop/600/400/games/562/562553814dd54e001a541e4ee83a591c.jpg"
 
+// SET CROPPED IMG URL
 export const getCroppedImageUrl = (url: string) => {
   if (!url) return '';
 
@@ -29,4 +31,16 @@ export const getCroppedImageUrl = (url: string) => {
   if (index === -1) return url;
 
   return url.slice(0, index + target.length) + 'crop/600/400/' + url.slice(index + target.length);
+};
+
+export const fetchGenres = async (signal?: AbortSignal) => {
+  try {
+    const response = await axios.get(`${baseUrl}/genres?key=${API_KEY}`, { signal });
+    const data = response.data;
+    console.log(`Genres Data:`, data);
+    return data;
+  } catch (error) {
+    console.log(`Error fetching genres:`, error);
+    throw error;
+  }
 };
