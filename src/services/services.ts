@@ -16,3 +16,17 @@ export const fetchGames = async (signal?: AbortSignal) => {
     throw error;
   }
 };
+
+// "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg"
+//"https://media.rawg.io/media/crop/600/400/games/562/562553814dd54e001a541e4ee83a591c.jpg"
+
+export const getCroppedImageUrl = (url: string) => {
+  if (!url) return '';
+
+  const target = 'media/';
+  const index = url.indexOf(target);
+
+  if (index === -1) return url;
+
+  return url.slice(0, index + target.length) + 'crop/600/400/' + url.slice(index + target.length);
+};
