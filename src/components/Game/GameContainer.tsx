@@ -7,7 +7,7 @@ import { GameCard, GameSkeleton } from '../index';
 /** @format */
 const GameContainer = () => {
   const { isLoading, gameList, error } = useFetchGames();
-  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
   console.log('GameList:', gameList);
 
   if (error) return <p>Error:{error}</p>;
