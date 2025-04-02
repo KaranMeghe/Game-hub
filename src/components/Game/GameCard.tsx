@@ -2,7 +2,7 @@
 
 import { Card, CardBody, Heading, HStack, Image } from '@chakra-ui/react';
 import React from 'react';
-import { CriticScore, PlatformsIcon } from '../index';
+import { CriticScore, GameCardContainer, PlatformsIcon } from '../index';
 import { getCroppedImageUrl } from '@/services/services';
 
 export interface GAME_PLATFORM {
@@ -28,16 +28,18 @@ const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
   const score = metacritic ?? 0;
 
   return (
-    <Card.Root borderRadius={10} overflow='hidden' width='300px' height='300px'>
-      <Image src={getCroppedImageUrl(background_image)} alt={name} />
-      <CardBody>
-        <Heading>{name}</Heading>
-        <HStack justifyContent='space-between'>
-          <PlatformsIcon platformIcons={parent_platforms} />
-          <CriticScore criticScore={score} />
-        </HStack>
-      </CardBody>
-    </Card.Root>
+    <GameCardContainer>
+      <Card.Root>
+        <Image src={getCroppedImageUrl(background_image)} alt={name} />
+        <CardBody>
+          <Heading>{name}</Heading>
+          <HStack justifyContent='space-between'>
+            <PlatformsIcon platformIcons={parent_platforms} />
+            <CriticScore criticScore={score} />
+          </HStack>
+        </CardBody>
+      </Card.Root>
+    </GameCardContainer>
   );
 };
 

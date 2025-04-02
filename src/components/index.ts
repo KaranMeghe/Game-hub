@@ -6,5 +6,6 @@ import GameCard from './Game/GameCard';
 import PlatformsIcon from './Game/PlatformsIcon';
 import CriticScore from './Game/CriticScore';
 import GameSkeleton from './Game/GameSkeleton';
+import GameCardContainer from './Game/GameCardContainer';
 
-export { Navbar, GameContainer, GameCard, PlatformsIcon, CriticScore, GameSkeleton };
+export { Navbar, GameContainer, GameCard, PlatformsIcon, CriticScore, GameSkeleton, GameCardContainer };
