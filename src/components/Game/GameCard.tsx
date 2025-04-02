@@ -28,7 +28,7 @@ const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
   const score = metacritic ?? 0;
 
   return (
-    <Card.Root borderRadius={10} overflow='hidden'>
+    <Card.Root borderRadius={10} overflow='hidden' width='300px' height='300px'>
       <Image src={getCroppedImageUrl(background_image)} alt={name} />
       <CardBody>
         <Heading>{name}</Heading>
