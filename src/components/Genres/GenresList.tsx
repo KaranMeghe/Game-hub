@@ -2,7 +2,7 @@
 
 import { useFetchGenres } from '@/Hooks/useFetchGenres';
 import { getCroppedImageUrl } from '@/services/services';
-import { HStack, List, Image, Button } from '@chakra-ui/react';
+import { HStack, List, Image, Button, Text } from '@chakra-ui/react';
 import GenresSkelton from './GenresSkeleton';
 import useFilterGames from '@/Hooks/useFilterGames';
 
@@ -14,9 +14,12 @@ const GenresList = () => {
 
   return (
     <List.Root listStyleType='none' padding='20px'>
+      <Text textStyle='2xl' fontWeight='bold' paddingY='10px'>
+        Genres
+      </Text>
       {isLoading && genresCount.map((count) => <GenresSkelton key={count} />)}
       {genres?.results.map((genre) => (
-        <List.Item key={genre.id} paddingY='10px'>
+        <List.Item key={genre.id} paddingY='3px'>
           <HStack>
             <Image boxSize='32px' borderRadius={8} src={getCroppedImageUrl(genre?.image_background)} />
             <Button variant='ghost' fontSize='lg' onClick={() => handleGameFilter(genre?.name)}>
