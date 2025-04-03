@@ -30,6 +30,12 @@ interface RATINGS {
   title: string;
 }
 
+interface GENRE {
+  id: number;
+  name: string;
+  slug: string;
+}
+
 interface GAME_RESULT {
   id: number;
   slug: string;
@@ -47,6 +53,7 @@ interface GAME_RESULT {
   esrb_rating: ESRB_RATING;
   platform: PLATFORM_DETAILS[];
   ratings: RATINGS[];
+  genres: GENRE[];
 }
 
 interface GAME_RESPONSE {
@@ -58,12 +65,14 @@ interface GAME_RESPONSE {
 
 interface GAMES_STATE {
   gameList: GAME_RESPONSE | null;
+  originalGameList: GAME_RESPONSE | null;
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: GAMES_STATE = {
   gameList: null,
+  originalGameList: null,
   isLoading: false,
   error: null,
 };
@@ -81,14 +90,21 @@ const gamesSlice = createSlice({
     fetchGamesSuccess: (state, action: PayloadAction<GAME_RESPONSE>) => {
       state.isLoading = false;
       state.gameList = action.payload;
+      state.originalGameList = action.payload;
     },
 
     fetchGamesFailure: (state, action: PayloadAction<string>) => {
       state.isLoading = false;
       state.error = action.payload;
     },
+
+    updateFilteredGames: (state, action: PayloadAction<GAME_RESULT[]>) => {
+      if (state.originalGameList) {
+        state.gameList = { ...state.originalGameList, results: action.payload };
+      }
+    },
   },
 });
 
-export const { fetchGamesStart, fetchGamesSuccess, fetchGamesFailure } = gamesSlice.actions;
+export const { fetchGamesStart, fetchGamesSuccess, fetchGamesFailure, updateFilteredGames } = gamesSlice.actions;
 export const gamesReducer = gamesSlice.reducer;

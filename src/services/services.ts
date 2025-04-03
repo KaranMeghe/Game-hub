@@ -8,10 +8,8 @@ const baseUrl = 'https://api.rawg.io/api';
 // Fetch Games
 export const fetchGames = async (signal?: AbortSignal) => {
   try {
-    const response = await axios.get(`${baseUrl}/games?key=${API_KEY}`, { signal });
-    const data = response.data;
-    console.log('Data', data);
-    return data;
+    const response = await axios.get(`${baseUrl}/games?key=${API_KEY}&page_size=30`, { signal });
+    return response.data;
   } catch (error) {
     console.error(`Error fetching games:`, error);
     throw error;
@@ -37,7 +35,6 @@ export const fetchGenres = async (signal?: AbortSignal) => {
   try {
     const response = await axios.get(`${baseUrl}/genres?key=${API_KEY}`, { signal });
     const data = response.data;
-    console.log(`Genres Data:`, data);
     return data;
   } catch (error) {
     console.log(`Error fetching genres:`, error);
