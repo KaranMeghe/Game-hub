@@ -1,7 +1,7 @@
 /** @format */
 
 import { Grid, GridItem } from '@chakra-ui/react';
-import { GameContainer, GenresContainer, Navbar } from './components';
+import { GameContainer, GenresContainer, Navbar, PlatformSelector } from './components';
 import { Provider } from 'react-redux';
 import { store } from './Redux/store';
 
@@ -23,7 +23,8 @@ const App = () => {
           <GenresContainer />
         </GridItem>
 
-        <GridItem area='main' mt='80px'>
+        <GridItem area='main' mt='80px' padding='20px' display='flex' flexDirection='column'>
+          <PlatformSelector />
           <GameContainer />
         </GridItem>
       </Grid>
