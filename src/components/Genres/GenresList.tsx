@@ -10,7 +10,7 @@ const GenresList = () => {
   const { genres, isLoading } = useFetchGenres();
   const genresCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
-  const { handleGameFilter } = useFilterGames();
+  const { handleGameFilter, selectedGenre } = useFilterGames();
 
   return (
     <List.Root listStyleType='none' padding='20px'>
@@ -22,7 +22,12 @@ const GenresList = () => {
         <List.Item key={genre.id} paddingY='3px'>
           <HStack>
             <Image boxSize='32px' borderRadius={8} src={getCroppedImageUrl(genre?.image_background)} />
-            <Button variant='ghost' fontSize='lg' onClick={() => handleGameFilter(genre?.name)}>
+            <Button
+              variant='ghost'
+              fontSize='lg'
+              fontWeight={selectedGenre === genre.name ? 'bold' : 'normal'}
+              color={selectedGenre === genre.name ? 'green.400' : ''}
+              onClick={() => handleGameFilter(genre?.name)}>
               {genre?.name}
             </Button>
           </HStack>

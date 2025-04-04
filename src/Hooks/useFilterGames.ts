@@ -2,9 +2,12 @@
 
 import { updateFilteredGames } from '@/Redux/Slices/gamesSlice';
 import { AppDispatch, RootState } from '@/Redux/store';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const useFilterGames = () => {
+  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
+
   const dispatch = useDispatch<AppDispatch>();
   const { originalGameList } = useSelector((store: RootState) => store.games);
 
@@ -20,12 +23,11 @@ export const useFilterGames = () => {
       (game) => game.genres && game.genres.some((g) => g.name === genre),
     );
 
-    console.log(`Filtering for genre: ${genre}, Found: ${filteredGames.length} games`);
-
+    setSelectedGenre(genre);
     dispatch(updateFilteredGames(filteredGames));
   };
 
-  return { handleGameFilter };
+  return { handleGameFilter, selectedGenre };
 };
 
 export default useFilterGames;
