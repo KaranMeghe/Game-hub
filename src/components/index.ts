@@ -10,6 +10,7 @@ import GameCardContainer from './Game/GameCardContainer';
 import GenresContainer from './Genres/GenresContainer';
 import GenresList from './Genres/GenresList';
 import GenresSkelton from './Genres/GenresSkeleton';
+import PlatformSelector from './Platforms/PlatformSelector';
 
 export {
   Navbar,
@@ -22,4 +23,5 @@ export {
   GenresContainer,
   GenresList,
   GenresSkelton,
+  PlatformSelector,
 };
