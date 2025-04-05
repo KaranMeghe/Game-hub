@@ -41,3 +41,7 @@ export const fetchGenres = async (signal?: AbortSignal) => {
     throw error;
   }
 };
+
+export const fetchPlatforms = (signal?: AbortSignal) => {
+  return axios.get(`${baseUrl}/platforms/lists/parents?key=${API_KEY}`, { signal });
+};
