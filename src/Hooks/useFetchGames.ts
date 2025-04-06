@@ -1,35 +1,23 @@
 /** @format */
 
-import { fetchGamesSuccess, fetchGamesFailure, fetchGamesStart } from '@/Redux/Slices/gamesSlice';
 import { AppDispatch, RootState } from '@/Redux/store';
-import { fetchGames } from '@/services/services';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import axios from 'axios';
+import { gamesThunks } from '@/Redux/Slices/Thunks/gamesThunks';
 
 const useFetchGames = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const hasFetched = useRef(false);
   const { isLoading, gameList, error } = useSelector((store: RootState) => store.games);
 
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
 
-    const gamesList = async () => {
-      try {
-        dispatch(fetchGamesStart());
-        const response = await fetchGames(signal);
-        dispatch(fetchGamesSuccess(response));
-      } catch (error) {
-        if (axios.isCancel(error)) {
-          console.log('Request was cancelled');
-          return;
-        }
-        dispatch(fetchGamesFailure((error as Error).message));
-      }
-    };
+    if (hasFetched.current) return; // prevent doubule call in dev mode,
+    hasFetched.current = true;
 
-    gamesList();
+    dispatch(gamesThunks());
+
     return () => {
       controller.abort();
     };
