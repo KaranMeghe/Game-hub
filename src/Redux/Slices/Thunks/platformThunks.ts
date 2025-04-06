@@ -3,6 +3,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchPlatforms } from '@/services/services';
 import { PLATFORM_RESPONSE } from '../platFormSlice';
+import { isAxiosError } from 'axios';
 
 export const fetchPlatformThunk = createAsyncThunk<PLATFORM_RESPONSE, void, { rejectValue: string }>(
   'Platform/fetchPlatforms',
@@ -10,8 +11,16 @@ export const fetchPlatformThunk = createAsyncThunk<PLATFORM_RESPONSE, void, { re
     try {
       const response = await fetchPlatforms();
       return response.data;
-    } catch (error: any) {
-      return thunkApi.rejectWithValue(error.message || 'Failed to fetch platforms');
+    } catch (error) {
+      let errorMessage = 'Failed to fetch platforms';
+
+      if (isAxiosError(error)) {
+        errorMessage = error.response?.data?.message || error.message;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
+
+      return thunkApi.rejectWithValue(errorMessage);
     }
   },
 );
