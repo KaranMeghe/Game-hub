@@ -8,7 +8,7 @@ import { gamesThunks } from '@/Redux/Slices/Thunks/gamesThunks';
 const useFetchGames = () => {
   const dispatch = useDispatch<AppDispatch>();
   const hasFetched = useRef(false);
-  const { isLoading, gameList, error } = useSelector((store: RootState) => store.games);
+  const { isLoading, gameList, error, isFiltering } = useSelector((store: RootState) => store.games);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -23,7 +23,7 @@ const useFetchGames = () => {
     };
   }, [dispatch]);
 
-  return { gameList, isLoading, error };
+  return { gameList, isLoading, error, isFiltering };
 };
 
 export default useFetchGames;

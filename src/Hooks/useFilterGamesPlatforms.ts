@@ -1,28 +1,31 @@
 /** @format */
 
-import { updateFilteredGames } from '@/Redux/Slices/gamesSlice';
+import { updateFilteredGames, setIsFiltering } from '@/Redux/Slices/gamesSlice';
 import { AppDispatch, RootState } from '@/Redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const useFilterGamesPlatforms = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { originalGameList } = useSelector((store: RootState) => store.games);
-  console.log(originalGameList);
+  const { originalGameList, isFiltering } = useSelector((store: RootState) => store.games);
 
   const handlePaltfomFilter = (platform: string | null) => {
     if (!originalGameList) return;
 
-    if (platform === null) {
-      dispatch(updateFilteredGames(originalGameList.results));
-      return;
-    }
+    dispatch(setIsFiltering(true));
 
-    const filterGames = originalGameList.results.filter((game) => {
-      return game.parent_platforms && game.parent_platforms.some((g) => g.platform.slug === platform);
-    });
+    setTimeout(() => {
+      if (platform === null) {
+        dispatch(updateFilteredGames(originalGameList.results));
+      } else {
+        const filterGames = originalGameList.results.filter((game) =>
+          game.parent_platforms?.some((g) => g.platform.slug === platform),
+        );
+        dispatch(updateFilteredGames(filterGames));
+      }
 
-    dispatch(updateFilteredGames(filterGames));
+      dispatch(setIsFiltering(false));
+    }, 500);
   };
 
-  return { handlePaltfomFilter };
+  return { handlePaltfomFilter, isFiltering };
 };

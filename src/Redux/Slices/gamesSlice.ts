@@ -73,6 +73,7 @@ interface GAMES_STATE {
   gameList: GAME_RESPONSE | null;
   originalGameList: GAME_RESPONSE | null;
   isLoading: boolean;
+  isFiltering: boolean;
   error: string | null;
 }
 
@@ -80,6 +81,7 @@ const initialState: GAMES_STATE = {
   gameList: null,
   originalGameList: null,
   isLoading: false,
+  isFiltering: false,
   error: null,
 };
 
@@ -92,6 +94,10 @@ const gamesSlice = createSlice({
       if (state.originalGameList) {
         state.gameList = { ...state.originalGameList, results: action.payload };
       }
+    },
+
+    setIsFiltering: (state, action: PayloadAction<boolean>) => {
+      state.isFiltering = action.payload;
     },
   },
 
@@ -107,7 +113,6 @@ const gamesSlice = createSlice({
       state.isLoading = false;
       state.gameList = action.payload;
       state.originalGameList = action.payload;
-      // state.firstLoad = false;
     });
 
     // Fetching Failed
@@ -118,5 +123,5 @@ const gamesSlice = createSlice({
   },
 });
 
-export const { updateFilteredGames } = gamesSlice.actions;
+export const { updateFilteredGames, setIsFiltering } = gamesSlice.actions;
 export const gamesReducer = gamesSlice.reducer;
