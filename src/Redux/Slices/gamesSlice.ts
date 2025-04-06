@@ -15,8 +15,12 @@ interface PLATFORM {
   name: string;
 }
 
+interface PARENT_PLATFORM {
+  platform: PLATFORM;
+}
+
 interface PLATFORM_DETAILS {
-  platforms: PLATFORM;
+  platform: PLATFORM;
   released_at: string;
   requirements: {
     minimum: string;
@@ -52,7 +56,8 @@ interface GAME_RESULT {
   playtime: number;
   updated: string;
   esrb_rating: ESRB_RATING;
-  platform: PLATFORM_DETAILS[];
+  platforms: PLATFORM_DETAILS[];
+  parent_platforms: PARENT_PLATFORM[];
   ratings: RATINGS[];
   genres: GENRE[];
 }
