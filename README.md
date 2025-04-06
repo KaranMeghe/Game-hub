@@ -1,54 +1,52 @@
-# React + TypeScript + Vite
+<!-- @format -->
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 🧠 Challenges Faced
 
-Currently, two official plugins are available:
+### 1. Preventing Double API Calls in Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Problem:**  
+During development, `useEffect` was triggered twice due to React Strict Mode, causing duplicate API calls.
 
-## Expanding the ESLint configuration
+**Solution:**  
+Used `useRef` to create a `hasFetched` flag, which ensures the thunk is only dispatched once:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+```tsx
+const hasFetched = useRef(false);
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+useEffect(() => {
+  if (hasFetched.current) return;
+  hasFetched.current = true;
+
+  dispatch(gamesThunk());
+}, []);
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Displaying Loading Spinner Inside NativeSelect
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+**Problem:**  
+Chakra UI's `NativeSelect` component does not natively support rendering a spinner or any loading indicator inside the dropdown while data is being fetched.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+**Solution:**  
+Wrapped the `NativeSelect` inside a `Box` with `position: relative`, and used `position: absolute` to overlay a custom `PlatformSpinner` component inside the dropdown field — aligned to the right:
+
+```tsx
+<Box width='240px' position='relative'>
+  <NativeSelect.Root size='sm' width='100%'>
+    <NativeSelect.Field placeholder='Select platform'>
+      {!isLoading &&
+        platforms?.results.map((result) => (
+          <option key={result.id} value={result.slug}>
+            {result.name}
+          </option>
+        ))}
+    </NativeSelect.Field>
+    <NativeSelect.Indicator />
+  </NativeSelect.Root>
+
+  {isLoading && (
+    <Box position='absolute' right='10px' top='50%' transform='translateY(-50%)'>
+      <PlatformSpinner />
+    </Box>
+  )}
+</Box>
 ```
