@@ -7,13 +7,8 @@ const baseUrl = 'https://api.rawg.io/api';
 
 // Fetch Games
 export const fetchGames = async (signal?: AbortSignal) => {
-  try {
-    const response = await axios.get(`${baseUrl}/games?key=${API_KEY}&page_size=30`, { signal });
-    return response.data;
-  } catch (error) {
-    console.error(`Error fetching games:`, error);
-    throw error;
-  }
+  const response = await axios.get(`${baseUrl}/games?key=${API_KEY}&page_size=30`, { signal });
+  return response.data;
 };
 
 // "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg"
