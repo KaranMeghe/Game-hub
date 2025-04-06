@@ -11,19 +11,19 @@ export const useFilterGames = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { originalGameList } = useSelector((store: RootState) => store.games);
 
-  const handleGameFilter = (genre: string | null) => {
+  const handleGameFilter = (input: string | null) => {
     if (!originalGameList?.results) return;
 
-    if (genre === null) {
+    if (input === null) {
       dispatch(updateFilteredGames(originalGameList.results));
       return;
     }
 
     const filteredGames = originalGameList.results.filter(
-      (game) => game.genres && game.genres.some((g) => g.name === genre),
+      (game) => game.genres && game.genres.some((g) => g.name === input),
     );
 
-    setSelectedGenre(genre);
+    setSelectedGenre(input);
     dispatch(updateFilteredGames(filteredGames));
   };
 

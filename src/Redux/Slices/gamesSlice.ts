@@ -1,6 +1,7 @@
 /** @format */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { gamesThunks } from './Thunks/gamesThunks';
 
 interface ESRB_RATING {
   id: number;
@@ -14,8 +15,12 @@ interface PLATFORM {
   name: string;
 }
 
+interface PARENT_PLATFORM {
+  platform: PLATFORM;
+}
+
 interface PLATFORM_DETAILS {
-  platforms: PLATFORM;
+  platform: PLATFORM;
   released_at: string;
   requirements: {
     minimum: string;
@@ -51,12 +56,13 @@ interface GAME_RESULT {
   playtime: number;
   updated: string;
   esrb_rating: ESRB_RATING;
-  platform: PLATFORM_DETAILS[];
+  platforms: PLATFORM_DETAILS[];
+  parent_platforms: PARENT_PLATFORM[];
   ratings: RATINGS[];
   genres: GENRE[];
 }
 
-interface GAME_RESPONSE {
+export interface GAME_RESPONSE {
   count: number;
   next: string;
   previous: string;
@@ -82,29 +88,35 @@ const gamesSlice = createSlice({
   initialState,
 
   reducers: {
-    fetchGamesStart: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-
-    fetchGamesSuccess: (state, action: PayloadAction<GAME_RESPONSE>) => {
-      state.isLoading = false;
-      state.gameList = action.payload;
-      state.originalGameList = action.payload;
-    },
-
-    fetchGamesFailure: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
-
     updateFilteredGames: (state, action: PayloadAction<GAME_RESULT[]>) => {
       if (state.originalGameList) {
         state.gameList = { ...state.originalGameList, results: action.payload };
       }
     },
   },
+
+  extraReducers: (builder) => {
+    // Fetching Start
+    builder.addCase(gamesThunks.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+
+    // Fetching Sucess
+    builder.addCase(gamesThunks.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.gameList = action.payload;
+      state.originalGameList = action.payload;
+      // state.firstLoad = false;
+    });
+
+    // Fetching Failed
+    builder.addCase(gamesThunks.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload ?? null;
+    });
+  },
 });
 
-export const { fetchGamesStart, fetchGamesSuccess, fetchGamesFailure, updateFilteredGames } = gamesSlice.actions;
+export const { updateFilteredGames } = gamesSlice.actions;
 export const gamesReducer = gamesSlice.reducer;

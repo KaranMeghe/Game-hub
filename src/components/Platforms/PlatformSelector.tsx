@@ -1,25 +1,34 @@
 /** @format */
 
+import { NativeSelect, Box } from '@chakra-ui/react';
 import { useFetchPlatforms } from '@/Hooks/useFetchPlatforms';
-import { NativeSelect } from '@chakra-ui/react';
+import PlatformSpinner from './PlatformSpinner';
+import { useFilterGamesPlatforms } from '@/Hooks/useFilterGamesPlatforms';
 
 const PlatformSelector = () => {
-  const { isLoading, platforms, error } = useFetchPlatforms();
+  const { isLoading, platforms } = useFetchPlatforms();
+  const { handlePaltfomFilter } = useFilterGamesPlatforms();
 
-  console.log(platforms);
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    handlePaltfomFilter(e.target.value);
+  };
+
   return (
-    <NativeSelect.Root size='sm' width='240px'>
-      <NativeSelect.Field placeholder='Select option'>
-        {platforms?.results.map((result) => {
-          return (
-            <option key={result.id} value={result.slug}>
-              {result.name}
-            </option>
-          );
-        })}
-      </NativeSelect.Field>
-      <NativeSelect.Indicator />
-    </NativeSelect.Root>
+    <Box width='240px' position='relative'>
+      <NativeSelect.Root size='sm' width='100%'>
+        <NativeSelect.Field placeholder='Select platform' onChange={handleChange}>
+          {!isLoading &&
+            platforms?.results.map((result) => (
+              <option key={result.id} value={result.slug}>
+                {result.name}
+              </option>
+            ))}
+        </NativeSelect.Field>
+        <NativeSelect.Indicator />
+      </NativeSelect.Root>
+
+      {isLoading && <PlatformSpinner />}
+    </Box>
   );
 };
 

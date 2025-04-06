@@ -1,18 +1,18 @@
 /** @format */
 
+import { fetchGames } from '@/services/services';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchPlatforms } from '@/services/services';
-import { PLATFORM_RESPONSE } from '../platFormSlice';
+import { GAME_RESPONSE } from '../gamesSlice';
 import { isAxiosError } from 'axios';
 
-export const fetchPlatformThunk = createAsyncThunk<PLATFORM_RESPONSE, void, { rejectValue: string }>(
-  'Platform/fetchPlatforms',
+export const gamesThunks = createAsyncThunk<GAME_RESPONSE, void, { rejectValue: string }>(
+  'games/fetchGames',
   async (_, thunkApi) => {
     try {
-      const response = await fetchPlatforms();
-      return response.data;
+      const response = await fetchGames(thunkApi.signal);
+      return response;
     } catch (error) {
-      let errorMessage = 'Failed to fetch platforms';
+      let errorMessage = 'Failed to fetch games';
 
       if (isAxiosError(error)) {
         errorMessage = error.response?.data?.message || error.message;

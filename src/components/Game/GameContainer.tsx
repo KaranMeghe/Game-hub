@@ -14,10 +14,9 @@ const GameContainer = () => {
   return (
     <Box width='100%'>
       <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3, '2xl': 4 }} gap='40px' paddingY='20px'>
-        {isLoading && skeletons.map((skeleton) => <GameSkeleton key={skeleton} />)}
-        {gameList?.results.map((game) => {
-          return <GameCard key={game.id} gameData={game} />;
-        })}
+        {isLoading
+          ? skeletons.map((skeleton) => <GameSkeleton key={skeleton} />)
+          : gameList?.results.map((game) => <GameCard key={game.id} gameData={game} />)}
       </SimpleGrid>
     </Box>
   );
