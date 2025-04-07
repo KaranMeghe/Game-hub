@@ -1,6 +1,7 @@
 /** @format */
 
 import axios from 'axios';
+import noImage from '../assets/Image Placeholder/no-image-placeholder-6f3882e0.webp';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const baseUrl = 'https://api.rawg.io/api';
@@ -16,7 +17,7 @@ export const fetchGames = async (signal?: AbortSignal) => {
 
 // SET CROPPED IMG URL
 export const getCroppedImageUrl = (url: string) => {
-  if (!url) return '';
+  if (!url) return noImage;
 
   const target = 'media/';
   const index = url.indexOf(target);
