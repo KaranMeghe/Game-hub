@@ -10,6 +10,13 @@ const useFetchGames = () => {
   const hasFetched = useRef(false);
   const { isLoading, gameList, error, isFiltering } = useSelector((store: RootState) => store.games);
 
+  const { genres } = useSelector((store: RootState) => store.genres);
+
+  const isGameListEmpty = gameList?.results?.length === 0;
+  const shouldShowSkelleton = isLoading || isFiltering;
+
+  console.log('Genres List Empty:', isGameListEmpty);
+
   useEffect(() => {
     const controller = new AbortController();
 
@@ -23,7 +30,7 @@ const useFetchGames = () => {
     };
   }, [dispatch]);
 
-  return { gameList, isLoading, error, isFiltering };
+  return { gameList, isLoading, error, isFiltering, isGameListEmpty, shouldShowSkelleton, genres };
 };
 
 export default useFetchGames;
