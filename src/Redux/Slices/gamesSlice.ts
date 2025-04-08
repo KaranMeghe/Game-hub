@@ -73,6 +73,7 @@ export interface GAME_RESPONSE {
 interface GAMES_STATE {
   gameList: GAME_RESPONSE | null;
   originalGameList: GAME_RESPONSE | null;
+  genreType: string | null;
   isLoading: boolean;
   isFiltering: boolean;
   error: string | null;
@@ -82,6 +83,7 @@ interface GAMES_STATE {
 const initialState: GAMES_STATE = {
   gameList: null,
   originalGameList: null,
+  genreType: null,
   isLoading: false,
   isFiltering: false,
   error: null,

@@ -9,7 +9,7 @@ export const useFetchPlatforms = () => {
   const dispatch = useDispatch<AppDispatch>();
   const hasFetched = useRef(false);
 
-  const { isLoading, platforms, error } = useSelector((state: RootState) => state.platforms);
+  const { isLoading, platforms, platformName, error } = useSelector((state: RootState) => state.platforms);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -23,5 +23,5 @@ export const useFetchPlatforms = () => {
     };
   }, [dispatch]);
 
-  return { isLoading, platforms, error };
+  return { isLoading, platforms, platformName, error };
 };

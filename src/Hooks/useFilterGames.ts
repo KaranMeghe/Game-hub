@@ -1,6 +1,8 @@
 /** @format */
 
 import { updateFilteredGames } from '@/Redux/Slices/gamesSlice';
+import { setGenresName } from '@/Redux/Slices/genresSlice';
+import { clearPlatformName } from '@/Redux/Slices/platFormSlice';
 import { AppDispatch, RootState } from '@/Redux/store';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,6 +27,8 @@ export const useFilterGames = () => {
 
     setSelectedGenre(input);
     dispatch(updateFilteredGames(filteredGames));
+    dispatch(setGenresName(input));
+    dispatch(clearPlatformName());
   };
 
   return { handleGameFilter, selectedGenre };

@@ -31,19 +31,28 @@ export interface PLATFORM_RESPONSE {
 interface PLATFORMS_STATE {
   isLoading: boolean;
   platforms: PLATFORM_RESPONSE | null;
+  platformName: string | null;
   error: null | string;
 }
 
 const initialState: PLATFORMS_STATE = {
   isLoading: false,
   platforms: null,
+  platformName: null,
   error: null,
 };
 
 const platFormSlice = createSlice({
   name: 'Platform',
   initialState,
-  reducers: {},
+  reducers: {
+    setPlatformName: (state, action) => {
+      state.platformName = action.payload;
+    },
+    clearPlatformName: (state) => {
+      state.platformName = null;
+    },
+  },
   extraReducers: (builder) => {
     // Request start
     builder.addCase(fetchPlatformThunk.pending, (state) => {
@@ -65,4 +74,5 @@ const platFormSlice = createSlice({
   },
 });
 
+export const { setPlatformName, clearPlatformName } = platFormSlice.actions;
 export const platformReducer = platFormSlice.reducer;

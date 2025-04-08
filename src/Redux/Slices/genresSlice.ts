@@ -20,12 +20,14 @@ interface GENRES {
 interface GENRES_STATE {
   isLoading: boolean;
   genres: GENRES | null;
+  genresName: string | null;
   error: string | null;
 }
 
 const initialState: GENRES_STATE = {
   isLoading: false,
   genres: null,
+  genresName: null,
   error: null,
 };
 
@@ -47,9 +49,16 @@ const genresSlice = createSlice({
       state.isLoading = false;
       state.error = action.payload;
     },
+    setGenresName: (state, action: PayloadAction<string>) => {
+      state.genresName = action.payload;
+    },
+    clearGenresName: (state) => {
+      state.genresName = null;
+    },
   },
 });
 
-export const { fetchGenresStart, fetchGenresSucess, fetchGenresFailure } = genresSlice.actions;
+export const { fetchGenresStart, fetchGenresSucess, fetchGenresFailure, setGenresName, clearGenresName } =
+  genresSlice.actions;
 
 export const genresReducer = genresSlice.reducer;

@@ -1,17 +1,11 @@
 /** @format */
 
 import { NativeSelect, Box } from '@chakra-ui/react';
-import { useFetchPlatforms } from '@/Hooks/useFetchPlatforms';
 import PlatformSpinner from './PlatformSpinner';
 import { useFilterGamesPlatforms } from '@/Hooks/useFilterGamesPlatforms';
 
 const PlatformSelector = () => {
-  const { isLoading, platforms } = useFetchPlatforms();
-  const { handlePaltfomFilter } = useFilterGamesPlatforms();
-
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    handlePaltfomFilter(e.target.value);
-  };
+  const { platforms, isLoading, handleChange } = useFilterGamesPlatforms();
 
   return (
     <Box width='240px' position='relative'>
