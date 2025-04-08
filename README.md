@@ -50,3 +50,34 @@ Wrapped the `NativeSelect` inside a `Box` with `position: relative`, and used `p
   )}
 </Box>
 ```
+
+## ⚠️ Bug Fix: App Crashed on Specific Search Term (e.g., "GTA")
+
+### ❌ Issue
+
+The application crashed when the user searched for **"GTA"**.  
+This issue did **not** occur with other search terms like **"WWE"**, **"Marvel"**, or **"Witcher"**.
+
+### 🔍 Root Cause
+
+Some games (e.g., GTA titles) returned platform data with `slug` values that were **not defined in the `iconMap`** used to render icons.  
+This caused Chakra UI’s `<Icon>` component to receive an `undefined` value for the `as` prop, leading to a runtime error:
+
+### ✅ Solution
+
+A check was added to ensure that only valid icon components (those defined in `iconMap`) are rendered:
+
+React.Children.only expected to receive a single React element child.
+
+```tsx
+{
+  platformIcons?.map(({ platform }) => {
+    const IconComponent = iconMap[platform.slug];
+    if (!IconComponent) return null;
+
+    return <Icon key={platform.id} as={IconComponent} color='gray.500' />;
+  });
+}
+```
+
+This prevents undefined values from being passed to the Chakra UI Icon component, fixing the crash.
