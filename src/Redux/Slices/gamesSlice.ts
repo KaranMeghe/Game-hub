@@ -2,6 +2,7 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { gamesThunks } from './Thunks/gamesThunks';
+import { searchGamesThunks } from './Thunks/searchGamesThunks';
 
 interface ESRB_RATING {
   id: number;
@@ -75,6 +76,7 @@ interface GAMES_STATE {
   isLoading: boolean;
   isFiltering: boolean;
   error: string | null;
+  searchInput: string | null;
 }
 
 const initialState: GAMES_STATE = {
@@ -83,6 +85,7 @@ const initialState: GAMES_STATE = {
   isLoading: false,
   isFiltering: false,
   error: null,
+  searchInput: null,
 };
 
 const gamesSlice = createSlice({
@@ -99,29 +102,51 @@ const gamesSlice = createSlice({
     setIsFiltering: (state, action: PayloadAction<boolean>) => {
       state.isFiltering = action.payload;
     },
+
+    handleSearchInput: (state, action: PayloadAction<string | null>) => {
+      state.searchInput = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
-    // Fetching Start
+    // Fetching Games Start
     builder.addCase(gamesThunks.pending, (state) => {
       state.isLoading = true;
       state.error = null;
     });
 
-    // Fetching Sucess
+    // Fetching Games Sucess
     builder.addCase(gamesThunks.fulfilled, (state, action) => {
       state.isLoading = false;
       state.gameList = action.payload;
       state.originalGameList = action.payload;
     });
 
-    // Fetching Failed
+    // Fetching Game Failed
     builder.addCase(gamesThunks.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload ?? null;
+    });
+
+    // Fetching Search Games Start
+    builder.addCase(searchGamesThunks.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+    // Fetching Search Games Success
+    builder.addCase(searchGamesThunks.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.gameList = action.payload;
+      state.originalGameList = action.payload;
+    });
+    // Fetching Search Games Failed
+
+    builder.addCase(searchGamesThunks.rejected, (state, action) => {
       state.isLoading = false;
       state.error = action.payload ?? null;
     });
   },
 });
 
-export const { updateFilteredGames, setIsFiltering } = gamesSlice.actions;
+export const { updateFilteredGames, setIsFiltering, handleSearchInput } = gamesSlice.actions;
 export const gamesReducer = gamesSlice.reducer;
