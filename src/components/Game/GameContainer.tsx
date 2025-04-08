@@ -20,8 +20,8 @@ const GameContainer = () => {
 
   if (!shouldShowSkelleton && gameList?.results.length === 0) {
     return (
-      <Center height='300px'>
-        <Text fontSize='lg'>Games are not available at this moment.</Text>
+      <Center height='600px'>
+        <Text fontSize='2xl'>Games are not available at this moment.</Text>
       </Center>
     );
   }
