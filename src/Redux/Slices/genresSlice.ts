@@ -1,6 +1,7 @@
 /** @format */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { genresThunks } from './Thunks/genresThunks';
 
 interface GENRE_RESULTS {
   id: number;
@@ -10,7 +11,7 @@ interface GENRE_RESULTS {
   image_background: string;
 }
 
-interface GENRES {
+export interface GENRES {
   count: number;
   next: string;
   previous: string;
@@ -35,20 +36,6 @@ const genresSlice = createSlice({
   name: 'genres',
   initialState,
   reducers: {
-    fetchGenresStart: (state) => {
-      state.isLoading = true;
-      state.error = null;
-    },
-
-    fetchGenresSucess: (state, action: PayloadAction<GENRES>) => {
-      state.isLoading = false;
-      state.genres = action.payload;
-    },
-
-    fetchGenresFailure: (state, action: PayloadAction<string>) => {
-      state.isLoading = false;
-      state.error = action.payload;
-    },
     setGenresName: (state, action: PayloadAction<string>) => {
       state.genresName = action.payload;
     },
@@ -56,9 +43,27 @@ const genresSlice = createSlice({
       state.genresName = null;
     },
   },
+  extraReducers: (builder) => {
+    // Fetch Genres start
+    builder.addCase(genresThunks.pending, (state) => {
+      state.isLoading = true;
+      state.error = null;
+    });
+
+    // Fetch Genres Success
+    builder.addCase(genresThunks.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.genres = action.payload;
+    });
+
+    // Fetch Genres Fail
+    builder.addCase(genresThunks.rejected, (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload ?? null;
+    });
+  },
 });
 
-export const { fetchGenresStart, fetchGenresSucess, fetchGenresFailure, setGenresName, clearGenresName } =
-  genresSlice.actions;
+export const { setGenresName, clearGenresName } = genresSlice.actions;
 
 export const genresReducer = genresSlice.reducer;
