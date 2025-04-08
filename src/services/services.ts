@@ -18,7 +18,6 @@ export const searchGames = async (searchInput: string | null, signal?: AbortSign
   const response = await axios.get(`${baseUrl}/games?key=${API_KEY}&page=2&page_size=20&search=${searchInput}`, {
     signal,
   });
-
   return response.data;
 };
 

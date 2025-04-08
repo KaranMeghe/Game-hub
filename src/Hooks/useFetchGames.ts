@@ -15,8 +15,6 @@ const useFetchGames = () => {
   const isGameListEmpty = gameList?.results?.length === 0;
   const shouldShowSkelleton = isLoading || isFiltering;
 
-  console.log('Genres List Empty:', isGameListEmpty);
-
   useEffect(() => {
     const controller = new AbortController();
 
