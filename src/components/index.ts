@@ -13,6 +13,7 @@ import GenresSkelton from './Genres/GenresSkeleton';
 import PlatformSelector from './Platforms/PlatformSelector';
 import SearchInput from './Navbar/SearchInput';
 import { Spinner } from '@chakra-ui/react';
+import DynamicHeading from './Dynamic-Texts/DynamicHeading';
 
 export {
   Navbar,
@@ -28,4 +29,5 @@ export {
   PlatformSelector,
   SearchInput,
   Spinner,
+  DynamicHeading,
 };
