@@ -18,7 +18,7 @@ export const searchGames = async (searchInput: string | null, signal?: AbortSign
   const response = await axios.get(`${baseUrl}/games?key=${API_KEY}&page=2&page_size=20&search=${searchInput}`, {
     signal,
   });
-  console.log(response.data);
+
   return response.data;
 };
 
@@ -38,14 +38,9 @@ export const getCroppedImageUrl = (url: string) => {
 };
 
 export const fetchGenres = async (signal?: AbortSignal) => {
-  try {
-    const response = await axios.get(`${baseUrl}/genres?key=${API_KEY}`, { signal });
-    const data = response.data;
-    return data;
-  } catch (error) {
-    console.log(`Error fetching genres:`, error);
-    throw error;
-  }
+  const response = await axios.get(`${baseUrl}/genres?key=${API_KEY}`, { signal });
+  const data = response.data;
+  return data;
 };
 
 export const fetchPlatforms = (signal?: AbortSignal) => {
