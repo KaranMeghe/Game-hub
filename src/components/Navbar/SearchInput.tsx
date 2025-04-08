@@ -18,6 +18,7 @@ const SearchInput = () => {
     if (inputRef.current) {
       dispatch(handleSearchInput(inputRef.current.value));
       dispatch(searchGamesThunks());
+      inputRef.current.value = '';
     }
   };
 
