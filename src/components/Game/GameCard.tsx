@@ -32,11 +32,11 @@ const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
       <Card.Root>
         <Image src={getCroppedImageUrl(background_image)} alt={name} />
         <CardBody>
-          <Heading>{name}</Heading>
-          <HStack justifyContent='space-between'>
+          <HStack justifyContent='space-between' mb={3}>
             <PlatformsIcon platformIcons={parent_platforms} />
             <CriticScore criticScore={score} />
           </HStack>
+          <Heading>{name}</Heading>
         </CardBody>
       </Card.Root>
     </GameCardContainer>

@@ -21,7 +21,12 @@ const GenresList = () => {
       {genres?.results.map((genre) => (
         <List.Item key={genre.id} paddingY='3px'>
           <HStack>
-            <Image boxSize='32px' borderRadius={8} src={getCroppedImageUrl(genre?.image_background)} />
+            <Image
+              boxSize='32px'
+              borderRadius={8}
+              src={getCroppedImageUrl(genre?.image_background)}
+              objectFit='cover'
+            />
             <Button
               variant='ghost'
               fontSize='lg'
