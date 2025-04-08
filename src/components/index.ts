@@ -11,6 +11,7 @@ import GenresContainer from './Genres/GenresContainer';
 import GenresList from './Genres/GenresList';
 import GenresSkelton from './Genres/GenresSkeleton';
 import PlatformSelector from './Platforms/PlatformSelector';
+import SearchInput from './Navbar/SearchInput';
 import { Spinner } from '@chakra-ui/react';
 
 export {
@@ -25,5 +26,6 @@ export {
   GenresList,
   GenresSkelton,
   PlatformSelector,
+  SearchInput,
   Spinner,
 };

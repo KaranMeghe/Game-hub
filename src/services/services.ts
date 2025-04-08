@@ -12,6 +12,16 @@ export const fetchGames = async (signal?: AbortSignal) => {
   return response.data;
 };
 
+// Search Games
+
+export const searchGames = async (searchInput: string | null, signal?: AbortSignal) => {
+  const response = await axios.get(`${baseUrl}/games?key=${API_KEY}&page=2&page_size=20&search=${searchInput}`, {
+    signal,
+  });
+  console.log(response.data);
+  return response.data;
+};
+
 // "https://media.rawg.io/media/games/562/562553814dd54e001a541e4ee83a591c.jpg"
 //"https://media.rawg.io/media/crop/600/400/games/562/562553814dd54e001a541e4ee83a591c.jpg"
 
