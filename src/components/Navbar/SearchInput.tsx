@@ -1,6 +1,8 @@
 /** @format */
 
 import { handleSearchInput } from '@/Redux/Slices/gamesSlice';
+import { clearGenresName } from '@/Redux/Slices/genresSlice';
+import { clearPlatformName } from '@/Redux/Slices/platFormSlice';
 import { searchGamesThunks } from '@/Redux/Slices/Thunks/searchGamesThunks';
 import { AppDispatch } from '@/Redux/store';
 import { Input, InputGroup } from '@chakra-ui/react';
@@ -19,6 +21,8 @@ const SearchInput = () => {
       dispatch(handleSearchInput(inputRef.current.value));
       dispatch(searchGamesThunks());
       inputRef.current.value = '';
+      dispatch(clearGenresName());
+      dispatch(clearPlatformName());
     }
   };
 
