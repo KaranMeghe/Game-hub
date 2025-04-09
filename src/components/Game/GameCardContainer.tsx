@@ -9,7 +9,7 @@ interface GAME_CARD_CONTAINER_PROPS {
 
 const GameCardContainer: React.FC<GAME_CARD_CONTAINER_PROPS> = ({ children }) => {
   return (
-    <Box borderRadius={10} overflow='hidden' width='300px' height='300px'>
+    <Box borderRadius={10} overflow='hidden' width='300px' height='350px'>
       {children}
     </Box>
   );

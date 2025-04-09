@@ -28,9 +28,9 @@ const GameContainer = () => {
   }
 
   return (
-    <Box width='100%'>
+    <Box maxW='1200px' w='100%' mx='auto'>
       <DynamicHeading />
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3, '2xl': 4 }} gap='40px' paddingY='20px'>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 3, '2xl': 4 }} gap='40px' py='20px'>
         {shouldShowSkelleton
           ? skeletons.map((skeleton) => <GameSkeleton key={skeleton} />)
           : gameList?.results.map((game) => <GameCard key={game.id} gameData={game} />)}
