@@ -25,7 +25,14 @@ const App = () => {
           <GenresContainer />
         </GridItem>
 
-        <GridItem area='main' display='flex' flexDirection='column' gap={4} alignItems='center' px={{ base: 4, sm: 6 }}>
+        <GridItem
+          area='main'
+          display='flex'
+          flexDirection='column'
+          gap={4}
+          alignItems='center'
+          justifyContent='center'
+          px={{ base: 4, sm: 6 }}>
           <Box w='100%' maxW='1200px' px={{ base: 4, sm: 6 }}>
             <PlatformSelector />
             <GameContainer />
