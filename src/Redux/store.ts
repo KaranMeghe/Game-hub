@@ -5,6 +5,7 @@ import { gamesReducer } from './Slices/gamesSlice';
 import { genresReducer } from './Slices/genresSlice';
 import { platformReducer } from './Slices/platFormSlice';
 import { gamesApi } from './api/gamesApi';
+import { genresApi } from './api/genresApi';
 
 const store = configureStore({
   reducer: {
@@ -12,8 +13,9 @@ const store = configureStore({
     genres: genresReducer,
     platforms: platformReducer,
     [gamesApi.reducerPath]: gamesApi.reducer,
+    [genresApi.reducerPath]: genresApi.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(gamesApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(gamesApi.middleware, genresApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

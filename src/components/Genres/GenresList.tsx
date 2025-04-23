@@ -1,16 +1,29 @@
 /** @format */
 
-import { useFetchGenres } from '@/Hooks/useFetchGenres';
+// import { useFetchGenres } from '@/Hooks/useFetchGenres';
 import { getCroppedImageUrl } from '@/services/services';
-import { HStack, List, Image, Button, Text } from '@chakra-ui/react';
+import { HStack, List, Image, Button, Text, Center } from '@chakra-ui/react';
 import GenresSkelton from './GenresSkeleton';
 import useFilterGames from '@/Hooks/useFilterGames';
+import { useFetchGenresQuery } from '@/Redux/api/genresApi';
 
 const GenresList = () => {
-  const { genres, isLoading } = useFetchGenres();
+  // const { genres, isLoading } = useFetchGenres();
+  const { data, isLoading, isError } = useFetchGenresQuery();
+
   const genresCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
   const { handleGameFilter, selectedGenre } = useFilterGames();
+
+  if (isError) {
+    return (
+      <Center height='300px'>
+        <Text color='red.400' fontWeight='bold'>
+          Error: "Unable to Fetch Genres"
+        </Text>
+      </Center>
+    );
+  }
 
   return (
     <List.Root listStyleType='none' padding='20px'>
@@ -18,7 +31,7 @@ const GenresList = () => {
         Genres
       </Text>
       {isLoading && genresCount.map((count) => <GenresSkelton key={count} />)}
-      {genres?.results.map((genre) => (
+      {data?.results.map((genre) => (
         <List.Item key={genre.id} paddingY='3px'>
           <HStack>
             <Image
