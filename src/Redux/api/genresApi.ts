@@ -1,7 +1,7 @@
 /** @format */
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GENRES } from '../Slices/genresSlice';
+import { GENRES } from '../models/genres.model';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const url = 'https://api.rawg.io/api';
