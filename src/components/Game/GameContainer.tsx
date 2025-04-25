@@ -2,15 +2,14 @@
 
 import { SimpleGrid, Box, Text, Center } from '@chakra-ui/react';
 import { DynamicHeading, GameCard, GameSkeleton } from '../index';
-// import useFetchGames from '@/Hooks/useFetchGames';
+
 import { useFetchGamesQuery } from '@/Redux/api/gamesApi';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
 
 const GameContainer = () => {
-  // const { gameList, error, shouldShowSkelleton } = useFetchGames();
-  const gamesApiResult = useFetchGamesQuery();
-  const { data, isLoading, isError } = useFetchGamesQuery();
-
-  console.log('GamesApiResponse:', gamesApiResult);
+  const platformId = useSelector((state: RootState) => state.filters.platformId);
+  const { data, isLoading, isError, isFetching } = useFetchGamesQuery({ platform: platformId });
 
   const skeletons = Array.from({ length: 18 }, (_, i) => i + 1);
 
@@ -36,7 +35,7 @@ const GameContainer = () => {
     <Box maxW='1200px' w='100%' mx='auto'>
       <DynamicHeading />
       <SimpleGrid columns={{ base: 1, lg: 3 }} gap='40px' py='20px'>
-        {isLoading
+        {isLoading || isFetching
           ? skeletons.map((skeleton) => <GameSkeleton key={skeleton} />)
           : data?.results.map((game) => <GameCard key={game.id} gameData={game} />)}
       </SimpleGrid>

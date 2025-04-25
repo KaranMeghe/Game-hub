@@ -5,7 +5,7 @@ import { Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 
 const DynamicHeading = () => {
-  const { platformName } = useSelector((store: RootState) => store.platforms);
+  const { platformName } = useSelector((store: RootState) => store.filters);
   const { genresName } = useSelector((store: RootState) => store.genres);
 
   const displayName = () => {

@@ -7,9 +7,11 @@ import { platformReducer } from './Slices/platFormSlice';
 import { gamesApi } from './api/gamesApi';
 import { genresApi } from './api/genresApi';
 import { platformsApi } from './api/platformsApi';
+import { filtersReducer } from './Slices/filterSlice';
 
 const store = configureStore({
   reducer: {
+    filters: filtersReducer,
     games: gamesReducer,
     genres: genresReducer,
     platforms: platformReducer,

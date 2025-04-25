@@ -2,22 +2,34 @@
 
 import { NativeSelect, Box } from '@chakra-ui/react';
 import PlatformSpinner from './PlatformSpinner';
-import { useFilterGamesPlatforms } from '@/Hooks/useFilterGamesPlatforms';
 import { useFetchPlatformsQuery } from '@/Redux/api/platformsApi';
+import { useLazyFetchGamesQuery } from '@/Redux/api/gamesApi'; // 👈 lazy fetch hook
+import { useDispatch } from 'react-redux';
+import { setPlatformName, setPlatformId } from '@/Redux/Slices/filterSlice';
 
 const PlatformSelector = () => {
-  // platforms, isLoading
-  const { handleChange } = useFilterGamesPlatforms();
   const { data, isLoading, isError } = useFetchPlatformsQuery();
+  const [triggerFetchGames, { isFetching }] = useLazyFetchGamesQuery(); // 👈 lazy fetch
+  // for games
+
+  const dispatch = useDispatch();
+
+  const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = e.target.value;
+    const selectedName = e.target.options[e.target.selectedIndex].text;
+    dispatch(setPlatformId(selectedId === '' ? undefined : selectedId));
+    dispatch(setPlatformName(selectedId === '' ? null : selectedName));
+  };
 
   return (
     <Box width='240px' position='relative'>
       <NativeSelect.Root size='sm' width='100%'>
-        <NativeSelect.Field placeholder='Select platform' onChange={handleChange}>
-          {isError && <option color='red.400'>Error: "Unable to Fetch Platforms"</option>}
+        <NativeSelect.Field placeholder='Select platform' onChange={handlePlatformChange}>
+          {isError && <option color='red.400'>Error loading platforms</option>}
+
           {!isLoading &&
             data?.results.map((result) => (
-              <option key={result.id} value={result.slug}>
+              <option key={result.id} value={result.id}>
                 {result.name}
               </option>
             ))}
@@ -25,7 +37,7 @@ const PlatformSelector = () => {
         <NativeSelect.Indicator />
       </NativeSelect.Root>
 
-      {isLoading && <PlatformSpinner />}
+      {(isLoading || isFetching) && <PlatformSpinner />}
     </Box>
   );
 };

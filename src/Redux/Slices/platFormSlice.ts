@@ -53,6 +53,7 @@ const platFormSlice = createSlice({
       state.platformName = null;
     },
   },
+
   extraReducers: (builder) => {
     // Request start
     builder.addCase(fetchPlatformThunk.pending, (state) => {

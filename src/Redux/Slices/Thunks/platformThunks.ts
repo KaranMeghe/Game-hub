@@ -10,6 +10,7 @@ export const fetchPlatformThunk = createAsyncThunk<PLATFORM_RESPONSE, void, { re
   async (_, thunkApi) => {
     try {
       const response = await fetchPlatforms();
+      console.log('Platform response:', response.data);
       return response.data;
     } catch (error) {
       let errorMessage = 'Failed to fetch platforms';
@@ -24,3 +25,5 @@ export const fetchPlatformThunk = createAsyncThunk<PLATFORM_RESPONSE, void, { re
     }
   },
 );
+
+// https://api.rawg.io/api/games?pc&key=bd89670bbc2b44f2acf4604e686e6709
