@@ -14,8 +14,11 @@ const gamesApi = createApi({
   }),
 
   endpoints: (builder) => ({
-    fetchGames: builder.query<GAMES_RESPONSE, { platform?: string | null; genres?: number | null }>({
-      query: ({ platform, genres }) => {
+    fetchGames: builder.query<
+      GAMES_RESPONSE,
+      { platform?: string | null; genres?: number | null; search?: string | null }
+    >({
+      query: ({ platform, genres, search }) => {
         let queryString = `/games?key=${API_KEY}`;
 
         if (platform) {
@@ -26,6 +29,10 @@ const gamesApi = createApi({
           queryString += `&genres=${genres}`;
         }
 
+        if (search) {
+          queryString += `&search=${search}`;
+        }
+
         return {
           url: queryString,
           method: 'GET',
@@ -33,7 +40,6 @@ const gamesApi = createApi({
       },
     }),
   }),
-  //   keepUnusedDataFor: 0,
 });
 
 export const { useFetchGamesQuery, useLazyFetchGamesQuery } = gamesApi;

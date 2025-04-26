@@ -8,9 +8,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/store';
 
 const GameContainer = () => {
-  const platformId = useSelector((state: RootState) => state.filters.platformId);
-  const genreId = useSelector((state: RootState) => state.filters.genreId);
-  const { data, isLoading, isError, isFetching } = useFetchGamesQuery({ platform: platformId, genres: genreId });
+  const { platformId, genreId, searchInput } = useSelector((state: RootState) => state.filters);
+  const { data, isLoading, isError, isFetching } = useFetchGamesQuery({
+    platform: platformId,
+    genres: genreId,
+    search: searchInput,
+  });
 
   const skeletons = Array.from({ length: 18 }, (_, i) => i + 1);
 
