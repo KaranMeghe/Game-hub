@@ -1,6 +1,4 @@
 /** @format */
-
-// import { useFetchGenres } from '@/Hooks/useFetchGenres';
 import { getCroppedImageUrl } from '../../services/services';
 import { HStack, List, Image, Button, Text, Center } from '@chakra-ui/react';
 import GenresSkelton from './GenresSkeleton';

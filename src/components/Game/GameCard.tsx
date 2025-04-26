@@ -3,7 +3,7 @@
 import { Card, CardBody, Heading, HStack, Image } from '@chakra-ui/react';
 import React from 'react';
 import { CriticScore, GameCardContainer, PlatformsIcon } from '../index';
-import { getCroppedImageUrl } from '@/services/services';
+import { getCroppedImageUrl } from '../../services/services';
 
 export interface GAME_PLATFORM {
   id: number;
