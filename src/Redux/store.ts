@@ -1,9 +1,6 @@
 /** @format */
 
 import { configureStore } from '@reduxjs/toolkit';
-import { gamesReducer } from './Slices/gamesSlice';
-import { genresReducer } from './Slices/genresSlice';
-import { platformReducer } from './Slices/platFormSlice';
 import { gamesApi } from './api/gamesApi';
 import { genresApi } from './api/genresApi';
 import { platformsApi } from './api/platformsApi';
@@ -12,9 +9,6 @@ import { filtersReducer } from './Slices/filterSlice';
 const store = configureStore({
   reducer: {
     filters: filtersReducer,
-    games: gamesReducer,
-    genres: genresReducer,
-    platforms: platformReducer,
     [gamesApi.reducerPath]: gamesApi.reducer,
     [genresApi.reducerPath]: genresApi.reducer,
     [platformsApi.reducerPath]: platformsApi.reducer,
