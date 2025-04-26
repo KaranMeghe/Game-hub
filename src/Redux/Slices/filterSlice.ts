@@ -3,13 +3,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FiltersState {
-  platformId?: string | undefined;
+  platformId?: string | null;
   platformName?: string | null;
+  genreId?: number | null;
+  genreName?: string | null;
 }
 
 const initialState: FiltersState = {
-  platformId: undefined,
+  platformId: null,
   platformName: null,
+  genreId: null,
+  genreName: null,
 };
 
 const filtersSlice = createSlice({
@@ -17,14 +21,21 @@ const filtersSlice = createSlice({
   initialState,
 
   reducers: {
-    setPlatformId: (state, action: PayloadAction<string | undefined>) => {
+    setPlatformId: (state, action: PayloadAction<string | null>) => {
       state.platformId = action.payload;
     },
     setPlatformName: (state, action: PayloadAction<string | null>) => {
       state.platformName = action.payload;
     },
+    setGenreId: (state, action: PayloadAction<number | null>) => {
+      state.genreId = action.payload;
+    },
+
+    setGenreName: (state, action: PayloadAction<string | null>) => {
+      state.genreName = action.payload;
+    },
   },
 });
 
-export const { setPlatformId, setPlatformName } = filtersSlice.actions;
+export const { setPlatformId, setPlatformName, setGenreName, setGenreId } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

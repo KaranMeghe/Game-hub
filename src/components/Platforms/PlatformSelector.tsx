@@ -17,8 +17,10 @@ const PlatformSelector = () => {
   const handlePlatformChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = e.target.value;
     const selectedName = e.target.options[e.target.selectedIndex].text;
-    dispatch(setPlatformId(selectedId === '' ? undefined : selectedId));
+    dispatch(setPlatformId(selectedId === '' ? null : selectedId));
     dispatch(setPlatformName(selectedId === '' ? null : selectedName));
+
+    triggerFetchGames({ platform: selectedId });
   };
 
   return (

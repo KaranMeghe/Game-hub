@@ -6,11 +6,11 @@ import { useSelector } from 'react-redux';
 
 const DynamicHeading = () => {
   const { platformName } = useSelector((store: RootState) => store.filters);
-  const { genresName } = useSelector((store: RootState) => store.genres);
+  const { genreName } = useSelector((store: RootState) => store.filters);
 
   const displayName = () => {
     if (platformName) return `Games : ${platformName}`;
-    if (genresName) return `Games : ${genresName}`;
+    if (genreName) return `Games : ${genreName}`;
     return `Games`;
   };
 

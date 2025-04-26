@@ -9,7 +9,8 @@ import { RootState } from '../../Redux/store';
 
 const GameContainer = () => {
   const platformId = useSelector((state: RootState) => state.filters.platformId);
-  const { data, isLoading, isError, isFetching } = useFetchGamesQuery({ platform: platformId });
+  const genreId = useSelector((state: RootState) => state.filters.genreId);
+  const { data, isLoading, isError, isFetching } = useFetchGamesQuery({ platform: platformId, genres: genreId });
 
   const skeletons = Array.from({ length: 18 }, (_, i) => i + 1);
 
