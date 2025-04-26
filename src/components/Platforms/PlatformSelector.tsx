@@ -5,7 +5,7 @@ import PlatformSpinner from './PlatformSpinner';
 import { useFetchPlatformsQuery } from '@/Redux/api/platformsApi';
 import { useLazyFetchGamesQuery } from '@/Redux/api/gamesApi'; // 👈 lazy fetch hook
 import { useDispatch } from 'react-redux';
-import { setPlatformName, setPlatformId } from '@/Redux/Slices/filterSlice';
+import { setPlatformName, setPlatformId, setGenreName } from '@/Redux/Slices/filterSlice';
 
 const PlatformSelector = () => {
   const { data, isLoading, isError } = useFetchPlatformsQuery();
@@ -19,7 +19,7 @@ const PlatformSelector = () => {
     const selectedName = e.target.options[e.target.selectedIndex].text;
     dispatch(setPlatformId(selectedId === '' ? null : selectedId));
     dispatch(setPlatformName(selectedId === '' ? null : selectedName));
-
+    dispatch(setGenreName(''));
     triggerFetchGames({ platform: selectedId });
   };
 

@@ -8,19 +8,19 @@ import { useFetchGenresQuery } from '@/Redux/api/genresApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { setGenreId, setGenreName } from '@/Redux/Slices/filterSlice';
 import { RootState } from '@/Redux/store';
+import { setPlatformName } from '@/Redux/Slices/filterSlice';
 
 const GenresList = () => {
   const { data, isLoading, isError } = useFetchGenresQuery();
   const dispatch = useDispatch();
   const genresCount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
 
-  // const { selectedGenre } = useFilterGames();
-
   const { genreName } = useSelector((store: RootState) => store.filters);
 
   const handleFilteredGenresGames = (genreId: number, genreName: string) => {
     dispatch(setGenreName(genreName));
     dispatch(setGenreId(genreId));
+    dispatch(setPlatformName(''));
   };
 
   if (isError) {
