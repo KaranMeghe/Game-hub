@@ -8,6 +8,7 @@ interface FiltersState {
   genreId?: number | null;
   genreName?: string | null;
   searchInput?: string | null;
+  pageNumber?: number | null;
 }
 
 const initialState: FiltersState = {
@@ -16,6 +17,7 @@ const initialState: FiltersState = {
   genreId: null,
   genreName: null,
   searchInput: null,
+  pageNumber: 1,
 };
 
 const filtersSlice = createSlice({
@@ -40,8 +42,24 @@ const filtersSlice = createSlice({
     setSearchInput: (state, action: PayloadAction<string | null>) => {
       state.searchInput = action.payload;
     },
+
+    setNextPageNumber: (state, action: PayloadAction<number>) => {
+      state.pageNumber = action.payload + 1;
+    },
+
+    setPrevPageNumber: (state, action: PayloadAction<number>) => {
+      state.pageNumber = action.payload - 1;
+    },
   },
 });
 
-export const { setPlatformId, setPlatformName, setGenreName, setGenreId, setSearchInput } = filtersSlice.actions;
+export const {
+  setPlatformId,
+  setPlatformName,
+  setGenreName,
+  setGenreId,
+  setSearchInput,
+  setNextPageNumber,
+  setPrevPageNumber,
+} = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

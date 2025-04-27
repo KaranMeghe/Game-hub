@@ -16,9 +16,9 @@ const gamesApi = createApi({
   endpoints: (builder) => ({
     fetchGames: builder.query<
       GAMES_RESPONSE,
-      { platform?: string | null; genres?: number | null; search?: string | null }
+      { platform?: string | null; genres?: number | null; search?: string | null; pageNumber?: number | null }
     >({
-      query: ({ platform, genres, search }) => {
+      query: ({ platform, genres, search, pageNumber }) => {
         let queryString = `/games?key=${API_KEY}`;
 
         if (platform) {
@@ -31,6 +31,10 @@ const gamesApi = createApi({
 
         if (search) {
           queryString += `&search=${search}`;
+        }
+
+        if (pageNumber) {
+          queryString += `&page=${pageNumber}`;
         }
 
         return {
