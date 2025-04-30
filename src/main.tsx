@@ -5,11 +5,31 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { Provider } from './components/ui/provider.tsx';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import HomeLayout from './components/HomeLayout.tsx';
+import { GameDetails } from './components/index.ts';
+
+const appRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      {
+        index: true,
+        element: <HomeLayout />,
+      },
+      {
+        path: 'gameinfo/:id',
+        element: <GameDetails />,
+      },
+    ],
+  },
+]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Provider>
-      <App />
+      <RouterProvider router={appRouter} />
     </Provider>
   </StrictMode>,
 );

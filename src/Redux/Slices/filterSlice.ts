@@ -9,6 +9,7 @@ interface FiltersState {
   genreName?: string | null;
   searchInput?: string | null;
   pageNumber?: number | null;
+  gameId?: number | null;
 }
 
 const initialState: FiltersState = {
@@ -18,6 +19,7 @@ const initialState: FiltersState = {
   genreName: null,
   searchInput: null,
   pageNumber: 1,
+  gameId: null,
 };
 
 const filtersSlice = createSlice({
@@ -50,6 +52,10 @@ const filtersSlice = createSlice({
     setPrevPageNumber: (state, action: PayloadAction<number>) => {
       state.pageNumber = action.payload - 1;
     },
+
+    setGameiD: (state, action: PayloadAction<number>) => {
+      state.gameId = action.payload;
+    },
   },
 });
 
@@ -61,5 +67,6 @@ export const {
   setSearchInput,
   setNextPageNumber,
   setPrevPageNumber,
+  setGameiD,
 } = filtersSlice.actions;
 export const filtersReducer = filtersSlice.reducer;

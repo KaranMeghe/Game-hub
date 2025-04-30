@@ -14,6 +14,7 @@ import PlatformSelector from './Platforms/PlatformSelector';
 import SearchInput from './Navbar/SearchInput';
 import { Spinner } from '@chakra-ui/react';
 import DynamicHeading from './Dynamic-Texts/DynamicHeading';
+import GameDetails from './Game/GameDetails';
 
 export {
   Navbar,
@@ -30,4 +31,5 @@ export {
   SearchInput,
   Spinner,
   DynamicHeading,
+  GameDetails,
 };

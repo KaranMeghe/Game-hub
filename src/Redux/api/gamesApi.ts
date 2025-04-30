@@ -16,35 +16,28 @@ const gamesApi = createApi({
   endpoints: (builder) => ({
     fetchGames: builder.query<
       GAMES_RESPONSE,
-      { platform?: string | null; genres?: number | null; search?: string | null; pageNumber?: number | null }
+      {
+        platform?: string | null;
+        genres?: number | null;
+        search?: string | null;
+        pageNumber?: number | null;
+      }
     >({
       query: ({ platform, genres, search, pageNumber }) => {
         let queryString = `/games?key=${API_KEY}`;
-
-        if (platform) {
-          queryString += `&platforms=${platform}`;
-        }
-
-        if (genres) {
-          queryString += `&genres=${genres}`;
-        }
-
-        if (search) {
-          queryString += `&search=${search}`;
-        }
-
-        if (pageNumber) {
-          queryString += `&page=${pageNumber}`;
-        }
-
-        return {
-          url: queryString,
-          method: 'GET',
-        };
+        if (platform) queryString += `&platforms=${platform}`;
+        if (genres) queryString += `&genres=${genres}`;
+        if (search) queryString += `&search=${search}`;
+        if (pageNumber) queryString += `&page=${pageNumber}`;
+        return { url: queryString, method: 'GET' };
       },
+    }),
+
+    fetchGameById: builder.query({
+      query: (gameId) => `/games/${gameId}?key=${API_KEY}`,
     }),
   }),
 });
 
-export const { useFetchGamesQuery, useLazyFetchGamesQuery } = gamesApi;
+export const { useFetchGamesQuery, useLazyFetchGamesQuery, useFetchGameByIdQuery } = gamesApi;
 export { gamesApi };

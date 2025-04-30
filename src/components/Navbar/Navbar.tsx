@@ -7,6 +7,7 @@ import SearchInput from './SearchInput';
 import { useColorModeValue } from '@/components/ui/color-mode';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { GenresContainer } from '../index';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const bgColor = useColorModeValue('white', 'black');
@@ -46,7 +47,9 @@ const Navbar = () => {
         </Drawer.Root>
       </Box>
 
-      <Image src={logo} boxSize='60px' />
+      <Link to='/'>
+        <Image src={logo} boxSize='60px' />
+      </Link>
       <SearchInput />
       <ColorModeButton />
     </HStack>

@@ -4,6 +4,10 @@ import { Card, CardBody, Heading, HStack, Image } from '@chakra-ui/react';
 import React from 'react';
 import { CriticScore, GameCardContainer, PlatformsIcon } from '../index';
 import { getCroppedImageUrl } from '../../services/services';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setGameiD } from '@/Redux/Slices/filterSlice';
+import { AppDispatch } from '@/Redux/store';
 
 export interface GAME_PLATFORM {
   id: number;
@@ -15,6 +19,7 @@ interface GAME_RESULT {
   background_image: string;
   name: string;
   metacritic?: number;
+  id: number;
   parent_platforms?: { platform: GAME_PLATFORM }[];
 }
 
@@ -23,22 +28,30 @@ interface GAME_CARD_PROPS {
 }
 
 const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
-  const { background_image, name, parent_platforms, metacritic } = gameData;
+  const { background_image, name, parent_platforms, metacritic, id } = gameData;
+  const dispatch = useDispatch<AppDispatch>();
 
   const score = metacritic ?? 0;
+  console.log('GameData', gameData);
+
+  const handleDispatch = (id: number) => {
+    dispatch(setGameiD(id));
+  };
 
   return (
     <GameCardContainer>
-      <Card.Root>
-        <Image src={getCroppedImageUrl(background_image)} alt={name} />
-        <CardBody>
-          <HStack justifyContent='space-between' mb={3}>
-            <PlatformsIcon platformIcons={parent_platforms} />
-            <CriticScore criticScore={score} />
-          </HStack>
-          <Heading>{name}</Heading>
-        </CardBody>
-      </Card.Root>
+      <Link to={`/gameinfo/${id}`} onClick={() => handleDispatch(id)}>
+        <Card.Root>
+          <Image src={getCroppedImageUrl(background_image)} alt={name} />
+          <CardBody>
+            <HStack justifyContent='space-between' mb={3}>
+              <PlatformsIcon platformIcons={parent_platforms} />
+              <CriticScore criticScore={score} />
+            </HStack>
+            <Heading>{name}</Heading>
+          </CardBody>
+        </Card.Root>
+      </Link>
     </GameCardContainer>
   );
 };
