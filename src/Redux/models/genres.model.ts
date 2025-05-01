@@ -1,6 +1,6 @@
 /** @format */
 
-interface GENRE_RESULTS {
+export interface GENRE_RESULTS {
   id: number;
   name: string;
   slug: string;

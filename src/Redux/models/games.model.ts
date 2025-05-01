@@ -1,5 +1,7 @@
 /** @format */
 
+import { GENRE_RESULTS } from './genres.model';
+
 interface ESRB_RATING {
   id: number;
   slug: string;
@@ -95,4 +97,27 @@ interface GAME_RESULT {
 
 export interface GAME_CARD_PROPS {
   gameData: GAME_RESULT;
+}
+
+// Game Details
+interface PARENT_PLATFORM {
+  id: number;
+  slug: string;
+  name: string;
+}
+
+interface PUBLISHER {
+  games_count: number;
+  id: number;
+  image_background: string;
+  name: string;
+  slug: string;
+}
+export interface GAME_DETAILS {
+  name: string;
+  description_raw: string;
+  metacritic: number;
+  genres: GENRE_RESULTS[];
+  parent_platforms: PARENT_PLATFORM[];
+  publishers: PUBLISHER[];
 }

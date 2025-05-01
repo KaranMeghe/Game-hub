@@ -13,7 +13,7 @@ const App = () => {
         <Navbar />
       </Box>
 
-      <Box mt='100px'>
+      <Box mt='100px' padding={5}>
         <Outlet />
       </Box>
     </Provider>

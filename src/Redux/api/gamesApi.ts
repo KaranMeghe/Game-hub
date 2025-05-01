@@ -1,7 +1,7 @@
 /** @format */
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GAMES_RESPONSE } from '../models/games.model';
+import { GAME_DETAILS, GAMES_RESPONSE } from '../models/games.model';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const url = 'https://api.rawg.io/api';
@@ -33,7 +33,7 @@ const gamesApi = createApi({
       },
     }),
 
-    fetchGameById: builder.query({
+    fetchGameById: builder.query<GAME_DETAILS, string | undefined>({
       query: (gameId) => `/games/${gameId}?key=${API_KEY}`,
     }),
   }),
