@@ -76,3 +76,23 @@ export interface GAMES_STATE {
   error: string | null;
   searchInput: string | null;
 }
+
+//
+
+export interface GAME_PLATFORM {
+  id: number;
+  name: string;
+  slug: string;
+}
+
+interface GAME_RESULT {
+  background_image: string;
+  name: string;
+  metacritic?: number;
+  id: number;
+  parent_platforms: PARENT_PLATFORM[];
+}
+
+export interface GAME_CARD_PROPS {
+  gameData: GAME_RESULT;
+}

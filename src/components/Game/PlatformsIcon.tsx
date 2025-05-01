@@ -1,7 +1,7 @@
 /** @format */
 
 import { HStack, Icon } from '@chakra-ui/react';
-import { GAME_PLATFORM } from './GameCard';
+import { GAME_PLATFORM } from '../../Redux/models/games.model';
 import { iconMap } from '@/utils/utils';
 import { BsGlobe } from 'react-icons/bs';
 

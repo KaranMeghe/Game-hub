@@ -12,7 +12,9 @@ const GameDetails = () => {
   const { isLoading, data, isError } = useFetchGameByIdQuery(gameId);
   console.log(data);
 
-  if (isLoading) return <p>Loading......</p>;
+  if (isLoading) return <p className='text-center'>Loading......</p>;
+  if (isError) return <p className='text-center'>Error......</p>;
+
   return <div>Game Details:{id}</div>;
 };
 

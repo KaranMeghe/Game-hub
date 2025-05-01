@@ -8,24 +8,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setGameiD } from '@/Redux/Slices/filterSlice';
 import { AppDispatch } from '@/Redux/store';
-
-export interface GAME_PLATFORM {
-  id: number;
-  name: string;
-  slug: string;
-}
-
-interface GAME_RESULT {
-  background_image: string;
-  name: string;
-  metacritic?: number;
-  id: number;
-  parent_platforms?: { platform: GAME_PLATFORM }[];
-}
-
-interface GAME_CARD_PROPS {
-  gameData: GAME_RESULT;
-}
+import { GAME_CARD_PROPS } from '@/Redux/models/games.model';
 
 const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
   const { background_image, name, parent_platforms, metacritic, id } = gameData;
