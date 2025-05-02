@@ -1,7 +1,7 @@
 /** @format */
 
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { GAME_DETAILS, GAME_TRAILER_RESPONSE, GAMES_RESPONSE } from '../models/games.model';
+import { GAME_DETAILS, GAME_SCREENSHOTS, GAME_TRAILER_RESPONSE, GAMES_RESPONSE } from '../models/games.model';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const url = 'https://api.rawg.io/api';
@@ -37,11 +37,21 @@ const gamesApi = createApi({
       query: (gameId) => `/games/${gameId}?key=${API_KEY}`,
     }),
 
-    fetchGameTrailer: builder.query<GAME_TRAILER_RESPONSE, string | undefined>({
+    fetchGameTrailer: builder.query<GAME_TRAILER_RESPONSE, number | undefined>({
       query: (gameId) => `/games/${gameId}/movies?key=${API_KEY}`,
+    }),
+
+    fetchGameScreenShots: builder.query<GAME_SCREENSHOTS, number | undefined>({
+      query: (gameId) => `/games/${gameId}/screenshots?key=${API_KEY}`,
     }),
   }),
 });
 
-export const { useFetchGamesQuery, useLazyFetchGamesQuery, useFetchGameByIdQuery, useFetchGameTrailerQuery } = gamesApi;
+export const {
+  useFetchGamesQuery,
+  useLazyFetchGamesQuery,
+  useFetchGameByIdQuery,
+  useFetchGameTrailerQuery,
+  useFetchGameScreenShotsQuery,
+} = gamesApi;
 export { gamesApi };

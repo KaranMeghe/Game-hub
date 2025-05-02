@@ -1,6 +1,6 @@
 /** @format */
 
-import { GameAttributes, GameTrailerBox } from '@/components';
+import { GameAttributes, GameTrailerBox, Screenshots } from '@/components';
 import { useFetchGameByIdQuery } from '@/Redux/api/gamesApi';
 
 import { Center, Box, Text as ChakraText, Heading, Button } from '@chakra-ui/react';
@@ -45,7 +45,8 @@ const GameDetails = () => {
         </Button>
       </>
       <GameAttributes gameData={gameData} />
-      <GameTrailerBox gameId={id} />
+      <GameTrailerBox gameId={gameData.id} />
+      <Screenshots gameId={gameData.id} />
     </>
   );
 };

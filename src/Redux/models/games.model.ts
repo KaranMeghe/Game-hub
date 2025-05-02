@@ -114,6 +114,7 @@ interface PUBLISHER {
   slug: string;
 }
 export interface GAME_DETAILS {
+  id: number;
   name: string;
   description_raw: string;
   metacritic: number;
@@ -139,4 +140,20 @@ export interface GAME_TRAILER_RESPONSE {
   next: string | null;
   previous: string | null;
   results: GAME_TRAILER[];
+}
+
+//
+
+interface SCREENSHOT_RESULTS {
+  id: number;
+  image: string;
+  width: number;
+  height: number;
+  is_deleted: boolean;
+}
+export interface GAME_SCREENSHOTS {
+  count: number;
+  next: null;
+  previous: null;
+  results: SCREENSHOT_RESULTS[];
 }

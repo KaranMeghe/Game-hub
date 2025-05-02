@@ -3,7 +3,7 @@
 import { useFetchGameTrailerQuery } from '@/Redux/api/gamesApi';
 
 interface Prop {
-  gameId: string | undefined;
+  gameId: number | undefined;
 }
 
 const GameTrailerBox = ({ gameId }: Prop) => {
