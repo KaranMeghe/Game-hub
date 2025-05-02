@@ -3,7 +3,7 @@
 import { GameAttributes, GameTrailerBox, Screenshots } from '@/components';
 import { useFetchGameByIdQuery } from '@/Redux/api/gamesApi';
 
-import { Center, Box, Text as ChakraText, Heading, Button } from '@chakra-ui/react';
+import { Center, Box, Text as ChakraText, Heading, Button, SimpleGrid, GridItem } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -31,9 +31,10 @@ const GameDetails = () => {
     );
 
   return (
-    <>
-      <Heading>{gameData.name}</Heading>
-      <>
+    <SimpleGrid columns={{ base: 1, md: 2 }} gap={5}>
+      <GridItem>
+        <Heading>{gameData.name}</Heading>
+
         {!expanded ? gameData.description_raw.slice(0, 450) : gameData.description_raw}
         <Button
           variant='solid'
@@ -43,11 +44,14 @@ const GameDetails = () => {
           onClick={() => setIsExpanded(!expanded)}>
           {!expanded ? 'Show More' : 'Show Less'}
         </Button>
-      </>
-      <GameAttributes gameData={gameData} />
-      <GameTrailerBox gameId={gameData.id} />
-      <Screenshots gameId={gameData.id} />
-    </>
+        <GameAttributes gameData={gameData} />
+      </GridItem>
+
+      <GridItem>
+        <GameTrailerBox gameId={gameData.id} />
+        <Screenshots gameId={gameData.id} />
+      </GridItem>
+    </SimpleGrid>
   );
 };
 
