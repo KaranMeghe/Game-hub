@@ -68,16 +68,22 @@ Game Hub is a React-based application where users can:
 - ✅ Enabled browser caching for unchanged libraries
 - ✅ Used **RTK Query** for built-in caching, retries, and state normalization
 - ✅ Lazy loaded large route components
+- 
+![Screenshot 2025-05-02 at 9 00 10 PM](https://github.com/user-attachments/assets/20229c93-6594-40c3-b064-74767462373f)
 
-_(You can add performance screenshots here using `![Alt](./screenshot.png)` if needed)_
+![Screenshot 2025-05-02 at 9 00 27 PM](https://github.com/user-attachments/assets/1337e0bc-d5cd-4c4d-8fdb-4aafaa381744)
 
----
+
 
 ## 📸 Screenshots
 
-_Add screenshots in your project folder and reference them here_
-![Desktop](./screenshots/game-hub.png)
-![Alt](./screenshots/game-hub-2.png)
+<img width="1416" alt="Screenshot 2025-05-02 at 9 30 12 PM" src="https://github.com/user-attachments/assets/887d3e32-a942-40e8-97f4-851200dc8fdf" />
+
+<img width="1425" alt="Screenshot 2025-05-02 at 9 30 44 PM" src="https://github.com/user-attachments/assets/28138605-6d75-4aed-81b7-14cfc75d9691" />
+
+<img width="275" alt="Screenshot 2025-05-02 at 9 32 03 PM" src="https://github.com/user-attachments/assets/d77d6d7d-1e39-4257-9351-38168fa141d6" />
+
+<img width="273" alt="Screenshot 2025-05-02 at 9 31 40 PM" src="https://github.com/user-attachments/assets/8533c2dc-0163-4058-85f8-5761e8b406cf" />
 
 ---
 
