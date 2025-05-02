@@ -12,8 +12,6 @@ const GameDetails = () => {
   const { id } = useParams();
   const { isLoading, data: gameData, isError } = useFetchGameByIdQuery(id);
 
-  console.log(gameData);
-
   if (isLoading)
     return (
       <Center height='100vh'>

@@ -15,7 +15,6 @@ const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const score = metacritic ?? 0;
-  console.log('GameData', gameData);
 
   const handleDispatch = (id: number) => {
     dispatch(setGameiD(id));

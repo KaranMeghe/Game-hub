@@ -1,7 +1,7 @@
 /** @format */
 
 import { Box, Heading } from '@chakra-ui/react';
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 
 interface Props {
   term: string;
