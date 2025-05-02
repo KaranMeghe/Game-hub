@@ -18,6 +18,7 @@ import GameDetails from '../Pages/GameDetails';
 import ErrorPage from '../Pages/ErrorPage';
 import DefinationItem from './DefinationItem/DefinationItem';
 import GameAttributes from './Game/GameAttributes';
+import GameTrailerBox from './Game/GameTrailerBox';
 
 export {
   Navbar,
@@ -38,4 +39,5 @@ export {
   ErrorPage,
   DefinationItem,
   GameAttributes,
+  GameTrailerBox,
 };

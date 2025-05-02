@@ -1,6 +1,6 @@
 /** @format */
 
-import { GameAttributes } from '@/components';
+import { GameAttributes, GameTrailerBox } from '@/components';
 import { useFetchGameByIdQuery } from '@/Redux/api/gamesApi';
 
 import { Center, Box, Text as ChakraText, Heading, Button } from '@chakra-ui/react';
@@ -11,6 +11,7 @@ const GameDetails = () => {
   const [expanded, setIsExpanded] = useState(false);
   const { id } = useParams();
   const { isLoading, data: gameData, isError } = useFetchGameByIdQuery(id);
+
   console.log(gameData);
 
   if (isLoading)
@@ -46,6 +47,7 @@ const GameDetails = () => {
         </Button>
       </>
       <GameAttributes gameData={gameData} />
+      <GameTrailerBox gameId={id} />
     </>
   );
 };

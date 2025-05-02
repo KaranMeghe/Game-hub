@@ -121,3 +121,22 @@ export interface GAME_DETAILS {
   parent_platforms: PARENT_PLATFORM[];
   publishers: PUBLISHER[];
 }
+
+export interface GAME_TRAILER_FORMAT {
+  480: string;
+  max: string;
+}
+
+export interface GAME_TRAILER {
+  id: number;
+  name: string;
+  preview: string;
+  data: GAME_TRAILER_FORMAT;
+}
+
+export interface GAME_TRAILER_RESPONSE {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: GAME_TRAILER[];
+}
