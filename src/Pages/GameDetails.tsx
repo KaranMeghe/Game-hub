@@ -38,14 +38,16 @@ const GameDetails = () => {
         <Heading>{gameData.name}</Heading>
 
         {!expanded ? gameData.description_raw.slice(0, 450) : gameData.description_raw}
-        <Button
-          variant='solid'
-          size='xs'
-          marginLeft={2}
-          colorPalette={'green'}
-          onClick={() => setIsExpanded(!expanded)}>
-          {!expanded ? 'Show More' : 'Show Less'}
-        </Button>
+        {gameData.description_raw.length >= 450 && (
+          <Button
+            variant='solid'
+            size='xs'
+            marginLeft={2}
+            colorPalette={'green'}
+            onClick={() => setIsExpanded(!expanded)}>
+            {!expanded ? 'Show More' : 'Show Less'}
+          </Button>
+        )}
         <GameAttributes gameData={gameData} />
       </GridItem>
 
