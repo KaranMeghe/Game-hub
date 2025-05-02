@@ -1,7 +1,6 @@
 /** @format */
 
 import Navbar from './Navbar/Navbar';
-
 import GameCard from './Game/GameCard';
 import PlatformsIcon from './Game/PlatformsIcon';
 import CriticScore from './Game/CriticScore';
@@ -10,7 +9,6 @@ import GenresSkelton from './Genres/GenresSkeleton';
 import SearchInput from './Navbar/SearchInput';
 import { Spinner } from '@chakra-ui/react';
 import DynamicHeading from './Dynamic-Texts/DynamicHeading';
-import ErrorPage from '../Pages/ErrorPage';
 import DefinationItem from './DefinationItem/DefinationItem';
 
 export {
@@ -23,6 +21,5 @@ export {
   SearchInput,
   Spinner,
   DynamicHeading,
-  ErrorPage,
   DefinationItem,
 };

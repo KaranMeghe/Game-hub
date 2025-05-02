@@ -1,28 +1,43 @@
 /** @format */
 
-import { StrictMode } from 'react';
+import { StrictMode, lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App.tsx';
 import { Provider } from './components/ui/provider.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import HomeLayout from './components/HomeLayout.tsx';
-import { ErrorPage } from './components/index.ts';
-import GameDetails from './Pages/GameDetails.tsx';
+
+const GameDetails = lazy(() => import('./Pages/GameDetails.tsx'));
+
+const HomeLayout = lazy(() => import('./components/HomeLayout.tsx'));
+
+const ErrorPage = lazy(() => import('./Pages/ErrorPage.tsx'));
 
 const appRouter = createBrowserRouter([
   {
     path: '/',
     element: <App />,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <Suspense>
+        <ErrorPage />
+      </Suspense>
+    ),
     children: [
       {
         index: true,
-        element: <HomeLayout />,
+        element: (
+          <Suspense>
+            <HomeLayout />
+          </Suspense>
+        ),
       },
       {
         path: 'gameinfo/:id',
-        element: <GameDetails />,
+        element: (
+          <Suspense>
+            <GameDetails />
+          </Suspense>
+        ),
       },
     ],
   },

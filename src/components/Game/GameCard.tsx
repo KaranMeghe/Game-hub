@@ -14,7 +14,6 @@ import { GAME_CARD_PROPS } from '@/Redux/models/games.model';
 const GameCard: React.FC<GAME_CARD_PROPS> = ({ gameData }) => {
   const { background_image, name, parent_platforms, metacritic, id } = gameData;
   const dispatch = useDispatch<AppDispatch>();
-
   const score = metacritic ?? 0;
 
   const handleDispatch = (id: number) => {

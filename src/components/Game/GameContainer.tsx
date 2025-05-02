@@ -40,7 +40,7 @@ const GameContainer = () => {
   return (
     <Box maxW='1200px' w='100%' mx='auto'>
       <DynamicHeading />
-      <SimpleGrid columns={{ base: 1, lg: 3 }} gap='40px' py='20px'>
+      <SimpleGrid columns={{ base: 1, lg: 3 }} gapX={20} py='20px'>
         {isLoading || isFetching
           ? skeletons.map((skeleton) => <GameSkeleton key={skeleton} />)
           : data?.results.map((game) => <GameCard key={game.id} gameData={game} />)}
