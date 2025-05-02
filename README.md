@@ -47,6 +47,7 @@ Game Hub is a React-based application where users can:
 - 🌗 Light/Dark theme support
 - 📱 Responsive layout
 - ⚡ Optimized performance using code splitting & caching
+- **Pagination**: Ability to go back and forward through pages of game listings
 
 ---
 
