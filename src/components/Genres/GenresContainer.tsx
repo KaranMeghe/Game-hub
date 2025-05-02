@@ -1,6 +1,6 @@
 /** @format */
 
-import GenresList from './GenresList';
+import GenresList from '../Genres/GenresList';
 
 const GenresContainer = () => {
   return (

@@ -6,7 +6,7 @@ import { ColorModeButton } from '../ui/color-mode';
 import SearchInput from './SearchInput';
 import { useColorModeValue } from '@/components/ui/color-mode';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { GenresContainer } from '../index';
+import GenresContainer from '../Genres/GenresContainer';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {

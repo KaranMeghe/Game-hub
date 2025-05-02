@@ -1,6 +1,8 @@
 /** @format */
 import { Box, Grid, GridItem } from '@chakra-ui/react';
-import { GenresContainer, PlatformSelector, GameContainer } from './index';
+import GameContainer from './Game/GameContainer';
+import GenresContainer from './Genres/GenresContainer';
+import PlatformSelector from './Platforms/PlatformSelector';
 
 const HomeLayout = () => {
   return (

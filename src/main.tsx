@@ -7,7 +7,8 @@ import App from './App.tsx';
 import { Provider } from './components/ui/provider.tsx';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import HomeLayout from './components/HomeLayout.tsx';
-import { ErrorPage, GameDetails } from './components/index.ts';
+import { ErrorPage } from './components/index.ts';
+import GameDetails from './Pages/GameDetails.tsx';
 
 const appRouter = createBrowserRouter([
   {

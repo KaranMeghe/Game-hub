@@ -1,6 +1,8 @@
 /** @format */
 
-import { GameAttributes, GameTrailerBox, Screenshots } from '@/components';
+import GameTrailerBox from '@/components/Game/GameTrailerBox';
+import GameAttributes from '@/components/Game/GameAttributes';
+import Screenshots from '@/components/Game/Screenshots';
 import { useFetchGameByIdQuery } from '@/Redux/api/gamesApi';
 
 import { Center, Box, Text as ChakraText, Heading, Button, SimpleGrid, GridItem } from '@chakra-ui/react';

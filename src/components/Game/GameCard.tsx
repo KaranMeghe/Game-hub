@@ -2,7 +2,8 @@
 
 import { Card, CardBody, Heading, HStack, Image } from '@chakra-ui/react';
 import React from 'react';
-import { CriticScore, GameCardContainer, PlatformsIcon } from '../index';
+import { CriticScore, PlatformsIcon } from '../index';
+import GameCardContainer from './GameCardContainer';
 import { getCroppedImageUrl } from '../../services/services';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
