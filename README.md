@@ -54,8 +54,21 @@ Game Hub is a React-based application where users can:
 ## 🧠 Challenges Faced
 
 - 🧱 **Large Bundle Size**: Initially, our bundle was too large (704 KB). We fixed this by applying [manual code splitting](https://vitejs.dev/guide/build.html#chunking-strategy) using Vite’s `manualChunks` to split React, Chakra, and Icon libraries into separate chunks, improving caching and reducing main bundle to **340 KB** – nearly **52% reduction**.
-- 🔄 **Boilerplate Redux**: Using Redux with thunks was too verbose. We migrated to **RTK Query**, which greatly reduced boilerplate, simplified async fetching logic, and improved **caching and performance**.
-- 🔁 **Caching Strategy**: By splitting large vendor files (like `react.js`) into separate chunks, browsers can cache them. So when code doesn’t change, users don’t re-download them — improving load time.
+- 🔄 **Boilerplate Redux**: At first, we handled async logic using Redux Thunks, which followed this flow:
+
+Services → Thunks → Slices → Custom Hook → Components
+
+❌ This structure was verbose, repetitive, and hard to maintain.
+
+✅ We migrated to **RTK Query**, simplifying everything to:
+
+RTK Query API Slice → Auto-generated Hooks → Components
+
+- 🔁 **Caching Strategy**:  
+  By splitting out large vendor libraries like `react.js` into separate chunks, browsers can **cache them long-term**. So if the code hasn't changed, they won't be re-downloaded — improving load times for repeat visits.
+
+By splitting large vendor files (like `react.js`) into separate chunks, browsers can cache them. So when code doesn’t change, users don’t re-download them — improving load time.
+
 - 🌍 **Dynamic Routing and Layouts**: Managing nested routes with layout wrappers required a clean component and router structure.
 - 📦 **Tree-shaking and unused code**: Fine-tuning Vite config helped reduce unused code via better chunking.
 
@@ -68,12 +81,9 @@ Game Hub is a React-based application where users can:
 - ✅ Enabled browser caching for unchanged libraries
 - ✅ Used **RTK Query** for built-in caching, retries, and state normalization
 - ✅ Lazy loaded large route components
-- 
-![Screenshot 2025-05-02 at 9 00 10 PM](https://github.com/user-attachments/assets/20229c93-6594-40c3-b064-74767462373f)
+- ![Screenshot 2025-05-02 at 9 00 10 PM](https://github.com/user-attachments/assets/20229c93-6594-40c3-b064-74767462373f)
 
 ![Screenshot 2025-05-02 at 9 00 27 PM](https://github.com/user-attachments/assets/1337e0bc-d5cd-4c4d-8fdb-4aafaa381744)
-
-
 
 ## 📸 Screenshots
 
@@ -115,7 +125,6 @@ npm run build
 ## 👤 Author
 
 - **Name**: Karan Meghe
-- **Email**: [karanmeghe@email.com]
 - **LinkedIn**: [LinkedIn Profile](https://www.linkedin.com/in/karan-meghe-015610209/)
 
 ---
