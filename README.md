@@ -101,7 +101,7 @@ By splitting large vendor files (like `react.js`) into separate chunks, browsers
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/game-hub.git
+git clone https://github.com/KaranMeghe/game-hub.git
 cd game-hub
 
 # Install dependencies
